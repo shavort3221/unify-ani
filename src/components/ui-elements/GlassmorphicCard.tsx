@@ -24,7 +24,7 @@ const GlassmorphicCard: React.FC<GlassmorphicCardProps> = ({
   return (
     <div
       className={cn(
-        "backdrop-blur-lg rounded-xl transition-all duration-300",
+        "backdrop-blur-lg rounded-xl animate-smooth",
         {
           // Size variants
           "p-4": size === 'sm',
@@ -38,7 +38,7 @@ const GlassmorphicCard: React.FC<GlassmorphicCardProps> = ({
           "bg-gradient-to-br from-sky-50 to-sky-100/80 dark:from-sky-950/40 dark:to-sky-900/30": variant === 'colorful',
           
           // Hover effects - enhanced
-          "hover:shadow-lg hover:-translate-y-1 hover:shadow-sky-500/10 dark:hover:shadow-sky-400/5": hover,
+          "animate-card": hover,
           
           // Border glow effect by color scheme
           "border": borderGlow,

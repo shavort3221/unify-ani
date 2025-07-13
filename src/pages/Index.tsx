@@ -110,7 +110,7 @@ const Index = () => {
         </section>
         
         <section className="py-20 px-6 md:px-12">
-          <div className="max-w-3xl mx-auto text-center animate-on-scroll opacity-0">
+          <div className="max-w-3xl mx-auto text-center animate-on-scroll opacity-0 animate-card">
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-6">
               Ready to Convert?
             </h2>
@@ -120,7 +120,7 @@ const Index = () => {
             </p>
             <a 
               href="#converter" 
-              className="inline-block px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors"
+              className="inline-block px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 animate-button"
             >
               Try the Converter
             </a>

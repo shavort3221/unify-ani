@@ -378,10 +378,10 @@ const UnitConverter: React.FC = () => {
                       key={item.type}
                       onClick={() => handleTypeChange(item.type)}
                       className={cn(
-                        "flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all duration-300",
+                        "flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap animate-button animate-verified",
                         selectedType === item.type 
-                          ? "bg-primary text-primary-foreground active-tab" 
-                          : "bg-secondary/50 text-secondary-foreground hover:bg-secondary/70"
+                          ? "bg-primary text-primary-foreground active-tab verified" 
+                          : "bg-secondary/50 text-secondary-foreground hover:bg-secondary/70 hover:shadow-md"
                       )}
                     >
                       {conversionIcons[item.type] || <Calculator size={18} />}
@@ -395,14 +395,14 @@ const UnitConverter: React.FC = () => {
         </div>
         
         <div className="flex flex-col lg:flex-row gap-8 items-start">
-          <div className="w-full lg:w-7/12 animate-scale-in">
+          <div className="w-full lg:w-7/12 animate-scale-in animate-card">
             <ConversionCard
               category={selectedType}
               units={getUnitsForType(selectedType)}
             />
           </div>
           
-          <div className="w-full lg:w-5/12 animate-fade-in" style={{ animationDelay: '100ms' }}>
+          <div className="w-full lg:w-5/12 animate-fade-in animate-card" style={{ animationDelay: '100ms' }}>
             <GlassmorphicCard variant="subtle" hover borderGlow>
               <div className="space-y-4">
                 <h3 className="text-lg font-medium">Conversion Tips</h3>
@@ -449,7 +449,7 @@ const UnitConverter: React.FC = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div className="text-center p-4">
+            <div className="text-center p-4 animate-card hover:bg-white/50 dark:hover:bg-gray-800/50 rounded-lg">
               <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Settings className="text-primary" size={24} />
               </div>
@@ -459,7 +459,7 @@ const UnitConverter: React.FC = () => {
               </p>
             </div>
             
-            <div className="text-center p-4">
+            <div className="text-center p-4 animate-card hover:bg-white/50 dark:hover:bg-gray-800/50 rounded-lg">
               <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Clock className="text-primary" size={24} />
               </div>
@@ -469,7 +469,7 @@ const UnitConverter: React.FC = () => {
               </p>
             </div>
             
-            <div className="text-center p-4">
+            <div className="text-center p-4 animate-card hover:bg-white/50 dark:hover:bg-gray-800/50 rounded-lg">
               <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Zap className="text-primary" size={24} />
               </div>
@@ -479,7 +479,7 @@ const UnitConverter: React.FC = () => {
               </p>
             </div>
             
-            <div className="text-center p-4">
+            <div className="text-center p-4 animate-card hover:bg-white/50 dark:hover:bg-gray-800/50 rounded-lg">
               <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Info className="text-primary" size={24} />
               </div>

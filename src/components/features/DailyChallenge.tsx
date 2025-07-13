@@ -212,12 +212,12 @@ const DailyChallenge: React.FC = () => {
         <p className="text-muted-foreground">New challenge every time</p>
       </div>
       
-      <div className="glass p-6 rounded-xl">
+      <div className="glass p-6 rounded-xl animate-card">
         <div className="flex items-center justify-between mb-4">
           <div className="text-sm font-medium flex items-center gap-2">
             <span>Current Streak: {streak} {streak > 0 && '🔥'}</span>
             {totalPoints > 0 && (
-              <span className="ml-2 flex items-center gap-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 px-2 py-0.5 rounded-full text-xs">
+              <span className="ml-2 flex items-center gap-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 px-2 py-0.5 rounded-full text-xs animate-pulse-subtle">
                 <Award size={14} /> {totalPoints} pts
               </span>
             )}
@@ -239,7 +239,7 @@ const DailyChallenge: React.FC = () => {
               value={userGuess}
               onChange={(e) => setUserGuess(e.target.value)}
               placeholder="Enter your answer"
-              className="flex-1 px-4 py-2 rounded-lg bg-background border focus:ring-2 focus:ring-sky-500 outline-none"
+              className="flex-1 px-4 py-2 rounded-lg bg-background border animate-input focus-ring"
               disabled={hasSubmitted}
             />
             <span className="flex items-center text-muted-foreground">
@@ -252,7 +252,7 @@ const DailyChallenge: React.FC = () => {
               type="submit"
               disabled={!userGuess}
               className={cn(
-                "w-full py-2 rounded-lg font-medium transition-all duration-300",
+                "w-full py-2 rounded-lg font-medium animate-button",
                 userGuess
                   ? "bg-sky-500 text-white hover:bg-sky-600"
                   : "bg-muted text-muted-foreground cursor-not-allowed"
@@ -264,7 +264,7 @@ const DailyChallenge: React.FC = () => {
             <button
               type="button"
               onClick={handleNewChallenge}
-              className="w-full py-2 rounded-lg font-medium transition-all duration-300 bg-green-500 text-white hover:bg-green-600"
+              className="w-full py-2 rounded-lg font-medium animate-button bg-green-500 text-white hover:bg-green-600"
             >
               Try A New Challenge
             </button>
@@ -278,7 +278,7 @@ const DailyChallenge: React.FC = () => {
         )}
         
         {showReward && currentReward && (
-          <div className="mt-6 p-4 rounded-lg bg-gradient-to-r from-sky-50 to-blue-50 dark:from-sky-900/30 dark:to-blue-900/30 border border-sky-100 dark:border-sky-800 text-center animate-fade-in">
+          <div className="mt-6 p-4 rounded-lg bg-gradient-to-r from-sky-50 to-blue-50 dark:from-sky-900/30 dark:to-blue-900/30 border border-sky-100 dark:border-sky-800 text-center animate-fade-in animate-card">
             <div className="flex justify-center mb-2">
               {currentReward.icon}
             </div>
