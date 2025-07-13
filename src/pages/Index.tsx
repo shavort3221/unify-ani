@@ -68,7 +68,7 @@ const Index = () => {
               <span className="inline-block py-1 px-3 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
                 Our Story
               </span>
-              <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
+              <h2 className="text-3xl md:text-4xl font-sans font-bold mb-4">
                 About TheUnitConverter
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -80,7 +80,7 @@ const Index = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               <div className="animate-on-scroll opacity-0" style={{ transitionDelay: '100ms' }}>
                 <div className="aspect-video rounded-xl overflow-hidden bg-secondary/50 flex items-center justify-center">
-                  <div className="text-4xl font-display font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/70">
+                  <div className="text-4xl font-sans font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/70">
                     TheUnitConverter
                   </div>
                 </div>
@@ -111,7 +111,7 @@ const Index = () => {
         
         <section className="py-20 px-6 md:px-12">
           <div className="max-w-3xl mx-auto text-center animate-on-scroll opacity-0 animate-card">
-            <h2 className="text-3xl md:text-4xl font-display font-bold mb-6">
+            <h2 className="text-3xl md:text-4xl font-sans font-bold mb-6">
               Ready to Convert?
             </h2>
             <p className="text-muted-foreground mb-8 max-w-xl mx-auto">

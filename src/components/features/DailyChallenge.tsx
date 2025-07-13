@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Trophy, Check, X, Award, Gift } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -208,7 +207,7 @@ const DailyChallenge: React.FC = () => {
           <Trophy size={16} className="animate-pulse" />
           Conversion Challenge
         </span>
-        <h3 className="text-2xl font-display font-bold mt-2 mb-1">Test Your Conversion Skills!</h3>
+        <h3 className="text-2xl font-sans font-bold mt-2 mb-1">Test Your Conversion Skills!</h3>
         <p className="text-muted-foreground">New challenge every time</p>
       </div>
       
