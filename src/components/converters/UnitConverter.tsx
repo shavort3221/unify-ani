@@ -283,6 +283,7 @@ const UnitConverter: React.FC = () => {
             Powerful & Simple
           </span>
           <h2 className="text-3xl md:text-4xl font-display font-bold">Advanced Unit Converter</h2>
+          <h2 className="text-3xl md:text-4xl font-sans font-bold">Advanced Unit Converter</h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
             Convert between hundreds of different units with precision and ease. Select a category to get started.
           </p>

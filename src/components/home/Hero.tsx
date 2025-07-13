@@ -154,7 +154,7 @@ const Hero: React.FC = () => {
           </span>
         </div>
         
-        <h1 className="animate-on-scroll opacity-0 text-5xl md:text-7xl lg:text-8xl font-display font-bold tracking-tight text-balance" style={{ transitionDelay: '200ms' }}>
+        <h1 className="animate-on-scroll opacity-0 text-5xl md:text-7xl lg:text-8xl font-sans font-bold tracking-tight text-balance" style={{ transitionDelay: '200ms' }}>
           <span className="animated-gradient-text">
             Convert Units with
           </span> 

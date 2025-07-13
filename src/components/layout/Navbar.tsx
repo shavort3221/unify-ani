@@ -68,7 +68,7 @@ const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <a 
           href="#" 
-          className="flex items-center text-2xl font-display font-bold text-foreground transition-all hover-lift"
+          className="flex items-center text-2xl font-sans font-bold text-foreground transition-all hover-lift"
         >
           <img 
             src="/lovable-uploads/eaf6fae9-0c13-4c84-8240-280c1c69018b.png" 

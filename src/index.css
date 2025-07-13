@@ -92,22 +92,22 @@
   
   /* SEO-friendly heading structure */
   h1 {
-    @apply text-4xl font-display font-bold mb-6;
+    @apply text-4xl font-sans font-bold mb-6;
   }
   h2 {
-    @apply text-3xl font-display font-bold mb-4;
+    @apply text-3xl font-sans font-bold mb-4;
   }
   h3 {
-    @apply text-2xl font-display font-semibold mb-3;
+    @apply text-2xl font-sans font-semibold mb-3;
   }
   h4 {
-    @apply text-xl font-display font-semibold mb-2;
+    @apply text-xl font-sans font-semibold mb-2;
   }
   h5 {
-    @apply text-lg font-display font-medium mb-2;
+    @apply text-lg font-sans font-medium mb-2;
   }
   h6 {
-    @apply text-base font-display font-medium mb-2;
+    @apply text-base font-sans font-medium mb-2;
   }
 }
 
