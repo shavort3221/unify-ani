@@ -155,7 +155,6 @@ const Hero: React.FC = () => {
         </div>
         
         <h1 className="animate-on-scroll opacity-0 text-4xl md:text-5xl lg:text-6xl font-sans font-bold tracking-tight text-balance" style={{ transitionDelay: '200ms' }}>
-        <h1 className="animate-on-scroll opacity-0 text-3xl md:text-4xl lg:text-5xl font-sans font-bold tracking-tight text-balance" style={{ transitionDelay: '200ms' }}>
           <span className="animated-gradient-text">
             Convert Units with
           </span> 
@@ -190,6 +189,3 @@ const Hero: React.FC = () => {
 };
 
 export default Hero;
-
-  )
-}
