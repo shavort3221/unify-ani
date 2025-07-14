@@ -10,7 +10,7 @@ import { ConversionType } from './types';
 import { getUnitsForType, convertValue } from './useUnitConverter';
 import { useToast } from '@/components/ui/use-toast';
 import { cn } from '../../lib/utils';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, LayoutGroup } from 'framer-motion';
 
 export interface ConversionHistoryItem {
   id: number;
@@ -511,23 +511,57 @@ const ConversionCard = ({ category, units, activePanel, setActivePanel }: Conver
     <Card className="w-full shadow-md border border-gray-100 dark:border-gray-800 animate-fade-in">
       <div className="pt-6 pb-6">
         <div className="flex justify-start pl-6">
-          <Tabs
+          <LayoutGroup>
+            <Tabs
             value={activePanel}
             onValueChange={(v) => {
               if (v === 'convert' || v === 'history' || v === 'quick') setActivePanel(v);
             }}
             className="w-full animate-smooth"
           >
-            <TabsList className="flex gap-8 mb-4 animate-smooth px-0">
-              <TabsTrigger value="convert">Convert</TabsTrigger>
-              <TabsTrigger value="history">History</TabsTrigger>
-              <TabsTrigger value="quick">Quick</TabsTrigger>
+            <TabsList className="flex gap-8 mb-4 animate-smooth px-0 bg-transparent relative">
+              {['convert', 'history', 'quick'].map((panel) => (
+                <TabsTrigger 
+                  key={panel}
+                  value={panel}
+                  className="relative z-10 px-4 py-2 transition-colors duration-200 data-[state=active]:text-primary-foreground data-[state=inactive]:text-foreground/70 data-[state=inactive]:hover:text-foreground bg-transparent"
+                >
+                  {activePanel === panel && (
+                    <motion.div
+                      layoutId="activePanelTab"
+                      className="absolute inset-0 bg-primary rounded-md"
+                      initial={false}
+                      transition={{
+                        type: "spring",
+                        stiffness: 500,
+                        damping: 30
+                      }}
+                    />
+                  )}
+                  <span className="relative z-10 capitalize">{panel}</span>
+                </TabsTrigger>
+              ))}
             </TabsList>
-          </Tabs>
+            </Tabs>
+          </LayoutGroup>
         </div>
-        {activePanel === 'convert' && renderConvertPanel()}
-        {activePanel === 'history' && renderHistoryPanel()}
-        {activePanel === 'quick' && renderQuickPanel()}
+        
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={activePanel}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ 
+              duration: 0.25,
+              ease: [0.4, 0, 0.2, 1]
+            }}
+          >
+            {activePanel === 'convert' && renderConvertPanel()}
+            {activePanel === 'history' && renderHistoryPanel()}
+            {activePanel === 'quick' && renderQuickPanel()}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </Card>
   );

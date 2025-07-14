@@ -27,10 +27,8 @@ const TabsTrigger = React.forwardRef<
   <TabsPrimitive.Trigger
     ref={ref}
     className={cn(
-      // Filled button for active, outline for inactive
-      "px-4 py-2 rounded-md font-medium text-sm transition focus-ring",
-      "data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md",
-      "data-[state=inactive]:bg-transparent data-[state=inactive]:text-foreground data-[state=inactive]:border data-[state=inactive]:border-input hover:bg-accent hover:text-accent-foreground",
+      "px-4 py-2 rounded-md font-medium text-sm transition-all duration-200 focus-ring relative",
+      "data-[state=inactive]:bg-transparent data-[state=inactive]:text-foreground/70 data-[state=inactive]:hover:text-foreground",
       className
     )}
     {...props}
@@ -41,25 +39,15 @@ TabsTrigger.displayName = TabsPrimitive.Trigger.displayName
 const TabsContent = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof TabsPrimitive.Content>
->(({ className, children, ...props }, ref) => {
-  // AnimatePresence for tab content
-  return (
-    <AnimatePresence mode="wait" initial={false}>
-      <TabsPrimitive.Content forceMount ref={ref} {...props} asChild>
-        <motion.div
-          key={props.value}
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -16 }}
-          transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
-          className={cn("mt-2 ring-offset-background focus-ring animate-fade-in", className)}
-        >
-          {children}
-        </motion.div>
-      </TabsPrimitive.Content>
-    </AnimatePresence>
-  )
-})
+>(({ className, children, ...props }, ref) => (
+  <TabsPrimitive.Content
+    ref={ref}
+    className={cn("mt-2 ring-offset-background focus-ring", className)}
+    {...props}
+  >
+    {children}
+  </TabsPrimitive.Content>
+))
 TabsContent.displayName = TabsPrimitive.Content.displayName
 
 export { Tabs, TabsList, TabsTrigger, TabsContent }

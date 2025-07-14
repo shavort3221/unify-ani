@@ -14,7 +14,7 @@ import ConversionCard from './ConversionCard';
 import GlassmorphicCard from '../ui-elements/GlassmorphicCard';
 import { cn } from '../../lib/utils';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, LayoutGroup } from 'framer-motion';
 
 const UnitConverter: React.FC = () => {
   const [selectedTab, setSelectedTab] = useState<string>('common');
@@ -357,39 +357,47 @@ const UnitConverter: React.FC = () => {
         </div>
         
         <div className="mb-8">
-          <Tabs defaultValue="common" value={selectedTab} onValueChange={setSelectedTab} className="w-full">
+          <LayoutGroup>
+            <Tabs defaultValue="common" value={selectedTab} onValueChange={setSelectedTab} className="w-full">
             <div className="relative overflow-hidden mb-2">
-              <TabsList className="w-full justify-start overflow-x-auto pb-2 flex gap-2 bg-transparent h-auto">
-                <TabsTrigger 
-                  value="common"
-                  className="px-4 py-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
-                >
-                  Common
-                </TabsTrigger>
-                <TabsTrigger 
-                  value="engineering"
-                  className="px-4 py-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
-                >
-                  Engineering
-                </TabsTrigger>
-                <TabsTrigger 
-                  value="digital"
-                  className="px-4 py-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
-                >
-                  Digital
-                </TabsTrigger>
-                <TabsTrigger 
-                  value="lifestyle"
-                  className="px-4 py-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
-                >
-                  Lifestyle
-                </TabsTrigger>
+              <TabsList className="w-full justify-start overflow-x-auto pb-2 flex gap-2 bg-transparent h-auto relative">
+                {['common', 'engineering', 'digital', 'lifestyle'].map((tab) => (
+                  <TabsTrigger 
+                    key={tab}
+                    value={tab}
+                    className="px-4 py-2 relative z-10 transition-colors duration-200 data-[state=active]:text-primary-foreground data-[state=inactive]:text-foreground/70 data-[state=inactive]:hover:text-foreground"
+                  >
+                    {selectedTab === tab && (
+                      <motion.div
+                        layoutId="activeTab"
+                        className="absolute inset-0 bg-primary rounded-md"
+                        initial={false}
+                        transition={{
+                          type: "spring",
+                          stiffness: 500,
+                          damping: 30
+                        }}
+                      />
+                    )}
+                    <span className="relative z-10 capitalize">{tab}</span>
+                  </TabsTrigger>
+                ))}
               </TabsList>
               <div className="absolute top-0 right-0 h-full w-16 bg-gradient-to-l from-background to-transparent pointer-events-none"></div>
             </div>
-            <AnimatePresence initial={false} mode="wait">
-              <TabsContent key={selectedTab} value={selectedTab} className="mt-4" forceMount asChild>
-                <div className="relative w-full">
+            <AnimatePresence mode="wait" initial={false}>
+              <TabsContent key={selectedTab} value={selectedTab} className="mt-4" forceMount>
+                <motion.div 
+                  key={selectedTab}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ 
+                    duration: 0.2,
+                    ease: [0.4, 0, 0.2, 1]
+                  }}
+                  className="relative w-full"
+                >
                   {selectedTab === 'common' && !searchTerm && (
                     <div className="flex flex-wrap gap-2 items-center overflow-hidden">
                       {conversionCategories.common.slice(0, TOP_COMMON_COUNT).map((item) => (
@@ -466,10 +474,11 @@ const UnitConverter: React.FC = () => {
                       </button>
                     </div>
                   )}
-                </div>
+                </motion.div>
               </TabsContent>
             </AnimatePresence>
-          </Tabs>
+            </Tabs>
+          </LayoutGroup>
         </div>
         
         <div className="flex flex-col lg:flex-row gap-8 items-start">
