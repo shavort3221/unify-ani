@@ -155,6 +155,7 @@ const Hero: React.FC = () => {
         </div>
         
         <h1 className="animate-on-scroll opacity-0 text-4xl md:text-5xl lg:text-6xl font-sans font-bold tracking-tight text-balance" style={{ transitionDelay: '200ms' }}>
+        <h1 className="animate-on-scroll opacity-0 text-3xl md:text-4xl lg:text-5xl font-sans font-bold tracking-tight text-balance" style={{ transitionDelay: '200ms' }}>
           <span className="animated-gradient-text">
             Convert Units with
           </span> 
@@ -174,24 +175,15 @@ const Hero: React.FC = () => {
         <div className="animate-on-scroll opacity-0 flex flex-col sm:flex-row items-center justify-center gap-4 pt-6 mb-8" style={{ transitionDelay: '400ms' }}>
           <a 
             href="#converter" 
-            className="px-6 py-3 rounded-lg btn-gradient text-white font-medium animate-button hover:shadow-lg hover:shadow-sky-500/20"
+            className="px-6 py-3 rounded-lg btn-gradient text-white font-medium animate-button hover:shadow-lg hover:shadow-sky-500/20 smooth-scroll-link"
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById('converter')?.scrollIntoView({ behavior: 'smooth' });
+            }}
           >
             Start Converting
           </a>
-          <a 
-            href="#about" 
-            className="px-6 py-3 rounded-lg glass text-foreground font-medium hover:bg-white/40 dark:hover:bg-white/10 animate-button"
-          >
-            Learn More
-          </a>
         </div>
-      </div>
-      
-      <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 animate-pulse-subtle">
-        <a href="#converter" className="flex flex-col items-center text-foreground hover:text-sky-500 dark:hover:text-sky-400 animate-smooth">
-          <span className="text-sm mb-2">Scroll Down</span>
-          <ArrowDown size={20} className="text-sky-500 dark:text-sky-400 animate-pulse-subtle" />
-        </a>
       </div>
     </section>
   );

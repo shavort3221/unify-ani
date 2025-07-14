@@ -48,6 +48,15 @@ const Navbar: React.FC = () => {
     { name: 'About', href: '#about' }
   ];
 
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const targetId = href.replace('#', '');
+    const targetElement = document.getElementById(targetId);
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const authLinks = isSignedIn
     ? [
         { name: 'Dashboard', href: '/dashboard', icon: <User size={16} className="mr-1" /> },
@@ -92,6 +101,7 @@ const Navbar: React.FC = () => {
             <a
               key={link.name}
               href={link.href}
+              onClick={(e) => handleSmoothScroll(e, link.href)}
               className="text-foreground/80 hover:text-blue-500 dark:hover:text-blue-400 font-medium text-sm animate-smooth nav-item-hover"
             >
               {link.name}
@@ -153,8 +163,11 @@ const Navbar: React.FC = () => {
             <a
               key={link.name}
               href={link.href}
+              onClick={(e) => {
+                handleSmoothScroll(e, link.href);
+                setIsMenuOpen(false);
+              }}
               className="text-foreground text-lg font-medium animate-smooth hover:text-blue-500 dark:hover:text-blue-400"
-              onClick={() => setIsMenuOpen(false)}
             >
               {link.name}
             </a>

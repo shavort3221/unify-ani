@@ -120,6 +120,10 @@ const Index = () => {
             </p>
             <a 
               href="#converter" 
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('converter')?.scrollIntoView({ behavior: 'smooth' });
+              }}
               className="inline-block px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 animate-button"
             >
               Try the Converter
