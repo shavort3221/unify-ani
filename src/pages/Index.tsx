@@ -61,11 +61,87 @@ const Index = () => {
       <Navbar />
       
       <main className="flex-grow">
-        <Hero />
-        <UnitConverter />
-        <DailyChallenge />
+        <section className="hero relative py-12 md:py-20 bg-gradient-to-b from-primary/10 to-background flex flex-col items-center text-center">
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <svg className="w-full h-full opacity-30 animate-float" viewBox="0 0 1440 320"><path fill="#38bdf8" fillOpacity="0.2" d="M0,160L60,170.7C120,181,240,203,360,197.3C480,192,600,160,720,133.3C840,107,960,85,1080,101.3C1200,117,1320,171,1380,197.3L1440,224L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+          </div>
+          <h1 className="text-4xl md:text-6xl font-bold mb-4">Convert Units with Precision</h1>
+          <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">A beautifully designed unit converter that transforms complex calculations into a seamless experience. Fast, accurate, and intuitive.</p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              className="rounded-md px-8 py-3 text-lg font-semibold bg-sky-500 text-white shadow-lg hover:bg-sky-600 focus:ring-2 focus:ring-sky-300 active:scale-95 transition-all duration-200"
+              onClick={e => {
+                e.preventDefault();
+                document.getElementById('converter')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              href="#converter"
+              role="button"
+              tabIndex={0}
+            >
+              Start Converting
+            </a>
+            <a
+              className="rounded-md px-8 py-3 text-lg font-semibold border border-sky-400 text-sky-400 bg-transparent hover:bg-sky-50/10 hover:text-white focus:ring-2 focus:ring-sky-300 active:scale-95 transition-all duration-200"
+              onClick={e => {
+                e.preventDefault();
+                document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              href="#features"
+              role="button"
+              tabIndex={0}
+            >
+              See Features
+            </a>
+          </div>
+        </section>
         
-        <section id="about" className="py-24 px-6 md:px-12 bg-secondary/30">
+        <section id="converter" className="py-12 px-6 md:px-12">
+          <div className="max-w-4xl mx-auto">
+            <UnitConverter />
+          </div>
+        </section>
+        
+        <section id="features" className="py-20 px-6 md:px-12 bg-secondary/30">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-sans font-bold mb-6 text-center animate-on-scroll opacity-0">
+              Features
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-center">
+              <div className="animate-on-scroll opacity-0" style={{ transitionDelay: '100ms' }}>
+                <div className="aspect-video rounded-xl overflow-hidden bg-secondary/50 flex items-center justify-center">
+                  <div className="text-4xl font-sans font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/70">
+                    Fast & Accurate
+                  </div>
+                </div>
+              </div>
+              <div className="animate-on-scroll opacity-0" style={{ transitionDelay: '200ms' }}>
+                <div className="aspect-video rounded-xl overflow-hidden bg-secondary/50 flex items-center justify-center">
+                  <div className="text-4xl font-sans font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/70">
+                    Intuitive Interface
+                  </div>
+                </div>
+              </div>
+              <div className="animate-on-scroll opacity-0" style={{ transitionDelay: '300ms' }}>
+                <div className="aspect-video rounded-xl overflow-hidden bg-secondary/50 flex items-center justify-center">
+                  <div className="text-4xl font-sans font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/70">
+                    Free to Use
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <section id="challenge" className="py-20 px-6 md:px-12">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-sans font-bold mb-6 text-center animate-on-scroll opacity-0">
+              Daily Challenge
+            </h2>
+            <DailyChallenge />
+          </div>
+        </section>
+        
+        <section id="about" className="py-20 px-6 md:px-12">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12 animate-on-scroll opacity-0">
               <span className="inline-block py-1 px-3 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">

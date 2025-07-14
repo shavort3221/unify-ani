@@ -502,20 +502,22 @@ const ConversionCard = ({ category, units, activePanel, setActivePanel }: Conver
 
   return (
     <Card className="w-full shadow-md border border-gray-100 dark:border-gray-800 animate-fade-in">
-      <div className="px-6 pt-6 pb-6">
-        <Tabs
-          value={activePanel}
-          onValueChange={(v) => {
-            if (v === 'convert' || v === 'history' || v === 'quick') setActivePanel(v);
-          }}
-          className="w-full animate-smooth"
-        >
-          <TabsList className="grid w-full grid-cols-3 mb-2 animate-smooth px-0">
-            <TabsTrigger value="convert">Convert</TabsTrigger>
-            <TabsTrigger value="history">History</TabsTrigger>
-            <TabsTrigger value="quick">Quick</TabsTrigger>
-          </TabsList>
-        </Tabs>
+      <div className="pt-6 pb-6">
+        <div className="flex justify-start pl-6">
+          <Tabs
+            value={activePanel}
+            onValueChange={(v) => {
+              if (v === 'convert' || v === 'history' || v === 'quick') setActivePanel(v);
+            }}
+            className="w-full animate-smooth"
+          >
+            <TabsList className="flex gap-8 mb-4 animate-smooth px-0">
+              <TabsTrigger value="convert">Convert</TabsTrigger>
+              <TabsTrigger value="history">History</TabsTrigger>
+              <TabsTrigger value="quick">Quick</TabsTrigger>
+            </TabsList>
+          </Tabs>
+        </div>
         {activePanel === 'convert' && renderConvertPanel()}
         {activePanel === 'history' && renderHistoryPanel()}
         {activePanel === 'quick' && renderQuickPanel()}
