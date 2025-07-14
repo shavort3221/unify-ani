@@ -415,6 +415,13 @@ const ConversionCard = ({ category, units, activePanel, setActivePanel }: Conver
       >
         Convert
       </Button>
+      <Button
+        variant="outline"
+        onClick={resetValues}
+        className="mt-2 ml-5 animate-button"
+      >
+        Reset
+      </Button>
     </CardContent>
   );
 

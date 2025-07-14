@@ -387,34 +387,75 @@ const UnitConverter: React.FC = () => {
               </TabsList>
               <div className="absolute top-0 right-0 h-full w-16 bg-gradient-to-l from-background to-transparent pointer-events-none"></div>
             </div>
-            <AnimatePresence mode="wait" initial={false}>
+            <AnimatePresence initial={false} mode="wait">
               <TabsContent key={selectedTab} value={selectedTab} className="mt-4" forceMount asChild>
-                <>
-                  <motion.div
-                    key={selectedTab}
-                    initial={{ opacity: 0, y: 16 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -16 }}
-                    transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
-                    ref={tabsRef}
-                    className="flex flex-wrap gap-2 items-center"
-                  >
-                    {filterConverters(selectedTab as keyof typeof conversionCategories).map((item) => (
-                      <button
-                        key={item.type}
-                        onClick={() => handleTypeChange(item.type as ConversionType)}
-                        className={cn(
-                          "flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap animate-button animate-verified",
-                          selectedType === item.type 
-                            ? "bg-primary text-primary-foreground active-tab verified" 
-                            : "bg-secondary/50 text-secondary-foreground hover:bg-secondary/70 hover:shadow-md"
+                <div className="relative w-full">
+                  {selectedTab === 'common' && !searchTerm && (
+                    <div className="flex flex-wrap gap-2 items-center overflow-hidden">
+                      {conversionCategories.common.slice(0, TOP_COMMON_COUNT).map((item) => (
+                        <button
+                          key={item.type}
+                          onClick={() => handleTypeChange(item.type as ConversionType)}
+                          className={cn(
+                            "flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap animate-button animate-verified",
+                            selectedType === item.type 
+                              ? "bg-primary text-primary-foreground active-tab verified" 
+                              : "bg-secondary/50 text-secondary-foreground hover:bg-secondary/70 hover:shadow-md"
+                          )}
+                        >
+                          {conversionIcons[item.type] || <Calculator size={18} />}
+                          <span>{item.label}</span>
+                        </button>
+                      ))}
+                      <AnimatePresence initial={false}>
+                        {showAllCommon && (
+                          <motion.div
+                            key="extra"
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+                            className="flex flex-wrap gap-2 items-center overflow-hidden"
+                          >
+                            {conversionCategories.common.slice(TOP_COMMON_COUNT).map((item) => (
+                              <button
+                                key={item.type}
+                                onClick={() => handleTypeChange(item.type as ConversionType)}
+                                className={cn(
+                                  "flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap animate-button animate-verified",
+                                  selectedType === item.type 
+                                    ? "bg-primary text-primary-foreground active-tab verified" 
+                                    : "bg-secondary/50 text-secondary-foreground hover:bg-secondary/70 hover:shadow-md"
+                                )}
+                              >
+                                {conversionIcons[item.type] || <Calculator size={18} />}
+                                <span>{item.label}</span>
+                              </button>
+                            ))}
+                          </motion.div>
                         )}
-                      >
-                        {conversionIcons[item.type] || <Calculator size={18} />}
-                        <span>{item.label}</span>
-                      </button>
-                    ))}
-                  </motion.div>
+                      </AnimatePresence>
+                    </div>
+                  )}
+                  {selectedTab !== 'common' && !searchTerm && (
+                    <div className="flex flex-wrap gap-2 items-center overflow-hidden">
+                      {conversionCategories[selectedTab]?.map((item) => (
+                        <button
+                          key={item.type}
+                          onClick={() => handleTypeChange(item.type as ConversionType)}
+                          className={cn(
+                            "flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap animate-button animate-verified",
+                            selectedType === item.type 
+                              ? "bg-primary text-primary-foreground active-tab verified" 
+                              : "bg-secondary/50 text-secondary-foreground hover:bg-secondary/70 hover:shadow-md"
+                          )}
+                        >
+                          {conversionIcons[item.type] || <Calculator size={18} />}
+                          <span>{item.label}</span>
+                        </button>
+                      ))}
+                    </div>
+                  )}
                   {selectedTab === 'common' && !searchTerm && (
                     <div className="mt-3">
                       <button
@@ -425,7 +466,7 @@ const UnitConverter: React.FC = () => {
                       </button>
                     </div>
                   )}
-                </>
+                </div>
               </TabsContent>
             </AnimatePresence>
           </Tabs>

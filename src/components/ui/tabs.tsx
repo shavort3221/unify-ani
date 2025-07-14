@@ -10,41 +10,12 @@ const TabsList = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.List>,
   React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>
 >(({ className, ...props }, ref) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [underlineProps, setUnderlineProps] = useState<{ left: number; width: number }>({ left: 0, width: 0 });
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  useLayoutEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-    const active = container.querySelector('[data-state="active"]') as HTMLElement;
-    if (active) {
-      const { offsetLeft, offsetWidth } = active;
-      if (
-        underlineProps.left !== offsetLeft ||
-        underlineProps.width !== offsetWidth
-      ) {
-        setUnderlineProps({ left: offsetLeft, width: offsetWidth });
-      }
-      const children = Array.from(container.children);
-      const newIndex = children.indexOf(active);
-      if (activeIndex !== newIndex) {
-        setActiveIndex(newIndex);
-      }
-    }
-    // Only run when the children or underlineProps/activeIndex change
-  }, [props.children, underlineProps.left, underlineProps.width, activeIndex]);
-
   return (
-    <div ref={containerRef} className={cn("relative", className)}>
-      <TabsPrimitive.List ref={ref} {...props} />
-      <motion.div
-        layout
-        transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-        className="absolute bottom-0 h-1 rounded bg-primary"
-        style={{ left: underlineProps.left, width: underlineProps.width }}
-      />
-    </div>
+    <TabsPrimitive.List
+      ref={ref}
+      className={cn("flex gap-2 bg-muted/30 p-1 rounded-lg", className)}
+      {...props}
+    />
   );
 });
 TabsList.displayName = TabsPrimitive.List.displayName
@@ -56,7 +27,10 @@ const TabsTrigger = React.forwardRef<
   <TabsPrimitive.Trigger
     ref={ref}
     className={cn(
-      "inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background animate-tab focus-ring disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm hover:bg-background/50 hover:text-foreground/80 relative overflow-hidden",
+      // Filled button for active, outline for inactive
+      "px-4 py-2 rounded-md font-medium text-sm transition focus-ring",
+      "data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md",
+      "data-[state=inactive]:bg-transparent data-[state=inactive]:text-foreground data-[state=inactive]:border data-[state=inactive]:border-input hover:bg-accent hover:text-accent-foreground",
       className
     )}
     {...props}
