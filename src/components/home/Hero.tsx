@@ -171,7 +171,7 @@ const Hero: React.FC = () => {
           A beautifully designed unit converter that transforms complex calculations into a seamless experience. Fast, accurate, and intuitive.
         </p>
         
-        <div className="animate-on-scroll opacity-0 flex flex-col sm:flex-row items-center justify-center gap-4 pt-6 mb-8" style={{ transitionDelay: '400ms' }}>
+        <div className="animate-fade-in flex flex-col sm:flex-row items-center justify-center gap-4 pt-6 mb-8" style={{ transitionDelay: '400ms' }}>
           <a 
             href="#converter" 
             className="px-6 py-3 rounded-lg btn-gradient text-white font-medium animate-button hover:shadow-lg hover:shadow-sky-500/20 smooth-scroll-link"

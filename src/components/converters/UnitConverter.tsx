@@ -8,16 +8,19 @@ import {
   ArrowUp, ArrowDown, Calendar, X, Cpu, Radio, Wind, Car, Image,
   User, Shirt, Footprints, CloudSnow, Gauge as TireIcon
 } from 'lucide-react';
-import useUnitConverter, { ConversionType, conversionCategories } from '@/hooks/useUnitConverter';
+import { conversionCategories } from './useUnitConverter';
+import { ConversionType } from './types';
 import ConversionCard from './ConversionCard';
 import GlassmorphicCard from '../ui-elements/GlassmorphicCard';
-import { cn } from '@/lib/utils';
+import { cn } from '../../lib/utils';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { AnimatePresence, motion } from 'framer-motion';
 
 const UnitConverter: React.FC = () => {
   const [selectedTab, setSelectedTab] = useState<string>('common');
   const [selectedType, setSelectedType] = useState<ConversionType>('length');
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const [activePanel, setActivePanel] = useState<'convert' | 'history' | 'quick'>('convert');
   const tabsRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
@@ -276,7 +279,10 @@ const UnitConverter: React.FC = () => {
   const searchResults = getAllConverters();
   
   return (
-    <section id="converter" className="py-8 px-6 md:px-12">
+    <section id="converter" className="py-8 px-6 md:px-12 scroll-mt-24 animate-fade-in">
+
+
+    
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-12 space-y-2">
           <span className="inline-block py-1 px-3 rounded-full bg-primary/10 text-primary text-sm font-medium">
@@ -366,14 +372,18 @@ const UnitConverter: React.FC = () => {
               </TabsList>
               <div className="absolute top-0 right-0 h-full w-16 bg-gradient-to-l from-background to-transparent pointer-events-none"></div>
             </div>
-
-            {Object.keys(conversionCategories).map((category) => (
-              <TabsContent key={category} value={category} className="mt-4">
-                <div 
+            <AnimatePresence mode="wait" initial={false}>
+              <TabsContent key={selectedTab} value={selectedTab} className="mt-4" forceMount asChild>
+                <motion.div
+                  key={selectedTab}
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -16 }}
+                  transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
                   ref={tabsRef}
                   className="flex flex-wrap gap-2"
                 >
-                  {filterConverters(category as keyof typeof conversionCategories).map((item) => (
+                  {filterConverters(selectedTab as keyof typeof conversionCategories).map((item) => (
                     <button
                       key={item.type}
                       onClick={() => handleTypeChange(item.type)}
@@ -388,21 +398,23 @@ const UnitConverter: React.FC = () => {
                       <span>{item.label}</span>
                     </button>
                   ))}
-                </div>
+                </motion.div>
               </TabsContent>
-            ))}
+            </AnimatePresence>
           </Tabs>
         </div>
         
         <div className="flex flex-col lg:flex-row gap-8 items-start">
-          <div className="w-full lg:w-7/12 animate-scale-in animate-card">
+          <div className="w-full lg:w-9/12 animate-card">
             <ConversionCard
               category={selectedType}
               units={getUnitsForType(selectedType)}
+              activePanel={activePanel}
+              setActivePanel={setActivePanel}
             />
           </div>
           
-          <div className="w-full lg:w-5/12 animate-fade-in animate-card" style={{ animationDelay: '100ms' }}>
+          <div className="w-full lg:w-3/12 animate-card" style={{ animationDelay: '100ms' }}>
             <GlassmorphicCard variant="subtle" hover borderGlow>
               <div className="space-y-4">
                 <h3 className="text-lg font-medium">Conversion Tips</h3>
@@ -440,7 +452,7 @@ const UnitConverter: React.FC = () => {
           </div>
         </div>
         
-        <div className="mt-20 glass rounded-xl p-8 animate-slide-up" style={{ animationDelay: '200ms' }}>
+        <div className="mt-20 glass rounded-xl p-8 animate-fade-in" style={{ animationDelay: '200ms' }}>
           <div className="text-center mb-6">
             <h3 className="text-2xl font-display font-medium mb-2">Enhanced Features</h3>
             <p className="text-muted-foreground">

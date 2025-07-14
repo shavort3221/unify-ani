@@ -24,7 +24,7 @@ const GlassmorphicCard: React.FC<GlassmorphicCardProps> = ({
   return (
     <div
       className={cn(
-        "backdrop-blur-lg rounded-xl animate-smooth",
+        "backdrop-blur-lg rounded-xl animate-fade-in",
         {
           // Size variants
           "p-4": size === 'sm',

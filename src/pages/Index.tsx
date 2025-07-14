@@ -9,6 +9,9 @@ import DailyChallenge from '@/components/features/DailyChallenge';
 const Index = () => {
   // Add scroll animation observer
   useEffect(() => {
+    // Always scroll to top on initial load
+    window.scrollTo(0, 0);
+    
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
