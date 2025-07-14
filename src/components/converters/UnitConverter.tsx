@@ -22,6 +22,12 @@ const UnitConverter: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [activePanel, setActivePanel] = useState<'convert' | 'history' | 'quick'>('convert');
   const tabsRef = useRef<HTMLDivElement>(null);
+  const [showTips, setShowTips] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('showTips') !== 'false';
+    }
+    return true;
+  });
   
   useEffect(() => {
     const activeTab = tabsRef.current?.querySelector('.active-tab');
@@ -405,7 +411,7 @@ const UnitConverter: React.FC = () => {
         </div>
         
         <div className="flex flex-col lg:flex-row gap-8 items-start">
-          <div className="w-full lg:w-9/12 animate-card">
+          <div className={showTips ? "w-full lg:w-9/12 animate-card" : "w-full lg:w-full animate-card"}>
             <ConversionCard
               category={selectedType}
               units={getUnitsForType(selectedType)}
@@ -413,12 +419,22 @@ const UnitConverter: React.FC = () => {
               setActivePanel={setActivePanel}
             />
           </div>
-          
-          <div className="w-full lg:w-3/12 animate-card" style={{ animationDelay: '100ms' }}>
-            <GlassmorphicCard variant="subtle" hover borderGlow>
-              <div className="space-y-4">
-                <h3 className="text-lg font-medium">Conversion Tips</h3>
-                
+          {showTips && (
+            <div className="w-full lg:w-3/12 animate-card" style={{ animationDelay: '100ms' }}>
+              <GlassmorphicCard variant="subtle" hover borderGlow className="bg-white/40 dark:bg-white/10 p-4">
+                <div className="flex justify-between items-center mb-2">
+                  <h3 className="text-lg font-medium">Conversion Tips</h3>
+                  <button
+                    className="ml-2 p-1 rounded hover:bg-black/10 dark:hover:bg-white/10 transition"
+                    onClick={() => {
+                      setShowTips(false);
+                      localStorage.setItem('showTips', 'false');
+                    }}
+                    title="Hide tips"
+                  >
+                    <X size={16} />
+                  </button>
+                </div>
                 <div className="space-y-3 text-sm">
                   <div className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
                     <h4 className="font-medium text-blue-800 dark:text-blue-200 mb-1">Quick Tips</h4>
@@ -447,9 +463,22 @@ const UnitConverter: React.FC = () => {
                     </ul>
                   </div>
                 </div>
-              </div>
-            </GlassmorphicCard>
-          </div>
+              </GlassmorphicCard>
+            </div>
+          )}
+          {!showTips && (
+            <div className="w-full lg:hidden flex justify-center mt-4">
+              <button
+                className="px-4 py-2 rounded bg-white/30 dark:bg-white/10 text-sm text-primary hover:bg-white/50 dark:hover:bg-white/20 transition"
+                onClick={() => {
+                  setShowTips(true);
+                  localStorage.setItem('showTips', 'true');
+                }}
+              >
+                Show Tips
+              </button>
+            </div>
+          )}
         </div>
         
         <div className="mt-20 glass rounded-xl p-8 animate-fade-in" style={{ animationDelay: '200ms' }}>
