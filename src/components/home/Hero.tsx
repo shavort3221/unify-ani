@@ -1,6 +1,98 @@
 
 import React, { useEffect, useRef } from 'react';
-import { ArrowDown, Sparkles } from 'lucide-react';
+import { ArrowDown, Sparkles, Ruler, Weight, Thermometer } from 'lucide-react';
+import { useState } from 'react';
+
+// Quick converter component
+const QuickConverter = ({ icon, label, fromUnit, toUnit, conversionFactor }: {
+  icon: React.ReactNode;
+  label: string;
+  fromUnit: string;
+  toUnit: string;
+  conversionFactor: number | ((val: number) => number);
+}) => {
+  const [value, setValue] = useState<string>('1');
+  const [result, setResult] = useState<string>('');
+
+  const convert = (inputValue: string) => {
+    const num = parseFloat(inputValue);
+    if (isNaN(num)) {
+      setResult('');
+      return;
+    }
+    
+    let converted: number;
+    if (typeof conversionFactor === 'function') {
+      converted = conversionFactor(num);
+    } else {
+      converted = num * conversionFactor;
+    }
+    
+    setResult(converted.toFixed(2));
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    setValue(newValue);
+    convert(newValue);
+  };
+
+  React.useEffect(() => {
+    convert(value);
+  }, []);
+
+  return (
+    <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-lg px-3 py-2 border border-white/20">
+      <div className="text-white/80">{icon}</div>
+      <div className="flex items-center gap-1 text-sm">
+        <input
+          type="number"
+          value={value}
+          onChange={handleInputChange}
+          className="w-16 px-1 py-0.5 rounded bg-white/20 text-white placeholder-white/60 text-xs border-0 focus:outline-none focus:bg-white/30"
+          placeholder="1"
+        />
+        <span className="text-white/70 text-xs">{fromUnit}</span>
+        <span className="text-white/50 mx-1">=</span>
+        <span className="text-white font-medium text-xs min-w-[3rem]">{result}</span>
+        <span className="text-white/70 text-xs">{toUnit}</span>
+      </div>
+    </div>
+  );
+};
+
+// Utility bar component
+const UtilityBar = () => {
+  return (
+    <div className="w-full bg-gradient-to-r from-sky-600 to-sky-500 py-3 px-6 md:px-12">
+      <div className="max-w-4xl mx-auto">
+        <div className="flex items-center justify-center gap-6 flex-wrap">
+          <QuickConverter
+            icon={<Ruler size={16} />}
+            label="Length"
+            fromUnit="ft"
+            toUnit="m"
+            conversionFactor={0.3048}
+          />
+          <QuickConverter
+            icon={<Weight size={16} />}
+            label="Weight"
+            fromUnit="lbs"
+            toUnit="kg"
+            conversionFactor={0.453592}
+          />
+          <QuickConverter
+            icon={<Thermometer size={16} />}
+            label="Temperature"
+            fromUnit="°F"
+            toUnit="°C"
+            conversionFactor={(f: number) => (f - 32) * 5/9}
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
 
 // Component for animated background effects
 const AnimatedBackground = () => {
@@ -138,15 +230,17 @@ const Hero: React.FC = () => {
   }, []);
   
   return (
-    <section id="home" ref={heroRef} className="min-h-screen flex flex-col justify-center relative pt-24 pb-32 px-6 md:px-12 overflow-hidden">
+    <>
+      <UtilityBar />
+      <section id="home" ref={heroRef} className="min-h-[60vh] flex flex-col justify-center relative pt-16 pb-20 px-6 md:px-12 overflow-hidden">
       <AnimatedBackground />
       <AIGridBackground />
       
       <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="absolute left-0 right-0 bottom-0 h-[60%] bg-gradient-to-t from-sky-500/5 to-transparent dark:from-sky-900/10"></div>
+        <div className="absolute left-0 right-0 bottom-0 h-[40%] bg-gradient-to-t from-sky-500/5 to-transparent dark:from-sky-900/10"></div>
       </div>
       
-      <div className="relative z-10 max-w-4xl mx-auto text-center space-y-8">
+      <div className="relative z-10 max-w-4xl mx-auto text-center space-y-6">
         <div className="animate-on-scroll opacity-0" style={{ transitionDelay: '100ms' }}>
           <span className="inline-flex items-center gap-2 py-2 px-4 rounded-full bg-sky-500/10 text-sky-600 dark:bg-sky-400/10 dark:text-sky-400 font-medium mb-4 hover-lift">
             <Sparkles size={16} className="animate-pulse" />
@@ -154,7 +248,7 @@ const Hero: React.FC = () => {
           </span>
         </div>
         
-        <h1 className="animate-on-scroll opacity-0 text-5xl md:text-7xl lg:text-8xl font-sans font-bold tracking-tight text-balance" style={{ transitionDelay: '200ms' }}>
+        <h1 className="animate-on-scroll opacity-0 text-4xl md:text-5xl lg:text-6xl font-sans font-bold tracking-tight text-balance" style={{ transitionDelay: '200ms' }}>
           <span className="animated-gradient-text">
             Convert Units with
           </span> 
@@ -167,11 +261,11 @@ const Hero: React.FC = () => {
           </span>
         </h1>
         
-        <p className="animate-on-scroll opacity-0 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto" style={{ transitionDelay: '300ms' }}>
+        <p className="animate-on-scroll opacity-0 text-base md:text-lg text-muted-foreground max-w-2xl mx-auto" style={{ transitionDelay: '300ms' }}>
           A beautifully designed unit converter that transforms complex calculations into a seamless experience. Fast, accurate, and intuitive.
         </p>
         
-        <div className="animate-on-scroll opacity-0 flex flex-col sm:flex-row items-center justify-center gap-4 pt-8 mb-16" style={{ transitionDelay: '400ms' }}>
+        <div className="animate-on-scroll opacity-0 flex flex-col sm:flex-row items-center justify-center gap-4 pt-6 mb-12" style={{ transitionDelay: '400ms' }}>
           <a 
             href="#converter" 
             className="px-6 py-3 rounded-lg btn-gradient text-white font-medium animate-button hover:shadow-lg hover:shadow-sky-500/20"
@@ -187,13 +281,14 @@ const Hero: React.FC = () => {
         </div>
       </div>
       
-      <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 animate-pulse-subtle">
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-pulse-subtle">
         <a href="#converter" className="flex flex-col items-center text-foreground hover:text-sky-500 dark:hover:text-sky-400 animate-smooth">
           <span className="text-sm mb-2">Scroll Down</span>
           <ArrowDown size={20} className="text-sky-500 dark:text-sky-400 animate-pulse-subtle" />
         </a>
       </div>
-    </section>
+      </section>
+    </>
   );
 };
 
