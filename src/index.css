@@ -82,9 +82,6 @@
   * {
     @apply border-border;
   }
-  html {
-    scroll-behavior: smooth;
-  }
   body {
     @apply bg-background text-foreground antialiased;
     background: linear-gradient(to bottom, hsl(var(--background)), hsl(var(--background)/0.8));

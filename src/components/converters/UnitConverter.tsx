@@ -276,13 +276,12 @@ const UnitConverter: React.FC = () => {
   const searchResults = getAllConverters();
   
   return (
-    <section id="converter" className="py-20 px-6 md:px-12">
+    <section id="converter" className="py-8 px-6 md:px-12">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-12 space-y-2">
           <span className="inline-block py-1 px-3 rounded-full bg-primary/10 text-primary text-sm font-medium">
             Powerful & Simple
           </span>
-          <h2 className="text-3xl md:text-4xl font-display font-bold">Advanced Unit Converter</h2>
           <h2 className="text-3xl md:text-4xl font-sans font-bold">Advanced Unit Converter</h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
             Convert between hundreds of different units with precision and ease. Select a category to get started.

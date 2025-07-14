@@ -138,12 +138,12 @@ const Hero: React.FC = () => {
   }, []);
   
   return (
-    <section id="home" ref={heroRef} className="min-h-screen flex flex-col justify-center relative pt-24 pb-32 px-6 md:px-12 overflow-hidden">
+    <section id="home" ref={heroRef} className="min-h-[70vh] flex flex-col justify-center relative pt-16 pb-16 px-6 md:px-12 overflow-hidden">
       <AnimatedBackground />
       <AIGridBackground />
       
       <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="absolute left-0 right-0 bottom-0 h-[60%] bg-gradient-to-t from-sky-500/5 to-transparent dark:from-sky-900/10"></div>
+        <div className="absolute left-0 right-0 bottom-0 h-[40%] bg-gradient-to-t from-sky-500/5 to-transparent dark:from-sky-900/10"></div>
       </div>
       
       <div className="relative z-10 max-w-4xl mx-auto text-center space-y-8">
@@ -154,7 +154,7 @@ const Hero: React.FC = () => {
           </span>
         </div>
         
-        <h1 className="animate-on-scroll opacity-0 text-5xl md:text-7xl lg:text-8xl font-sans font-bold tracking-tight text-balance" style={{ transitionDelay: '200ms' }}>
+        <h1 className="animate-on-scroll opacity-0 text-4xl md:text-5xl lg:text-6xl font-sans font-bold tracking-tight text-balance" style={{ transitionDelay: '200ms' }}>
           <span className="animated-gradient-text">
             Convert Units with
           </span> 
@@ -167,11 +167,11 @@ const Hero: React.FC = () => {
           </span>
         </h1>
         
-        <p className="animate-on-scroll opacity-0 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto" style={{ transitionDelay: '300ms' }}>
+        <p className="animate-on-scroll opacity-0 text-base md:text-lg text-muted-foreground max-w-2xl mx-auto" style={{ transitionDelay: '300ms' }}>
           A beautifully designed unit converter that transforms complex calculations into a seamless experience. Fast, accurate, and intuitive.
         </p>
         
-        <div className="animate-on-scroll opacity-0 flex flex-col sm:flex-row items-center justify-center gap-4 pt-8 mb-16" style={{ transitionDelay: '400ms' }}>
+        <div className="animate-on-scroll opacity-0 flex flex-col sm:flex-row items-center justify-center gap-4 pt-6 mb-8" style={{ transitionDelay: '400ms' }}>
           <a 
             href="#converter" 
             className="px-6 py-3 rounded-lg btn-gradient text-white font-medium animate-button hover:shadow-lg hover:shadow-sky-500/20"
@@ -187,7 +187,7 @@ const Hero: React.FC = () => {
         </div>
       </div>
       
-      <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 animate-pulse-subtle">
+      <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 animate-pulse-subtle">
         <a href="#converter" className="flex flex-col items-center text-foreground hover:text-sky-500 dark:hover:text-sky-400 animate-smooth">
           <span className="text-sm mb-2">Scroll Down</span>
           <ArrowDown size={20} className="text-sky-500 dark:text-sky-400 animate-pulse-subtle" />
