@@ -201,47 +201,47 @@ const DailyChallenge: React.FC = () => {
   if (!currentChallenge) return null;
   
   return (
-    <div className="w-full max-w-2xl mx-auto mt-16 mb-24">
-      <div className="text-center mb-8">
-        <span className="inline-flex items-center gap-2 py-1 px-3 rounded-full bg-sky-500/10 text-sky-600 dark:bg-sky-400/10 dark:text-sky-400 font-medium text-sm">
-          <Trophy size={16} className="animate-pulse" />
+    <div className="w-full max-w-2xl mx-auto mt-12 sm:mt-16 mb-16 sm:mb-24 px-4 sm:px-0">
+      <div className="text-center mb-6 sm:mb-8">
+        <span className="inline-flex items-center gap-2 py-1 px-3 rounded-full bg-sky-500/10 text-sky-600 dark:bg-sky-400/10 dark:text-sky-400 font-medium text-xs sm:text-sm">
+          <Trophy size={14} className="animate-pulse sm:w-4 sm:h-4" />
           Conversion Challenge
         </span>
-        <h3 className="text-2xl font-sans font-bold mt-2 mb-1">Test Your Conversion Skills!</h3>
-        <p className="text-muted-foreground">New challenge every time</p>
+        <h3 className="text-xl sm:text-2xl font-sans font-bold mt-2 mb-1">Test Your Conversion Skills!</h3>
+        <p className="text-sm sm:text-base text-muted-foreground">New challenge every time</p>
       </div>
       
-      <div className="glass p-6 rounded-xl animate-card">
-        <div className="flex items-center justify-between mb-4">
-          <div className="text-sm font-medium flex items-center gap-2">
+      <div className="glass p-4 sm:p-6 rounded-xl animate-card">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-2 sm:gap-0">
+          <div className="text-xs sm:text-sm font-medium flex items-center gap-2">
             <span>Current Streak: {streak} {streak > 0 && '🔥'}</span>
             {totalPoints > 0 && (
-              <span className="ml-2 flex items-center gap-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 px-2 py-0.5 rounded-full text-xs animate-pulse-subtle">
-                <Award size={14} /> {totalPoints} pts
+              <span className="ml-0 sm:ml-2 flex items-center gap-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 px-2 py-1 rounded-full text-xs animate-pulse-subtle">
+                <Award size={12} className="sm:w-[14px] sm:h-[14px]" /> {totalPoints} pts
               </span>
             )}
           </div>
-          <div className="text-sm text-muted-foreground">
+          <div className="text-xs sm:text-sm text-muted-foreground">
             {new Date().toLocaleDateString()}
           </div>
         </div>
         
-        <div className="text-lg font-medium mb-6 text-center">
+        <div className="text-base sm:text-lg font-medium mb-6 text-center">
           {currentChallenge.question}
         </div>
         
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="flex gap-4">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
             <input
               type="number"
               step="any"
               value={userGuess}
               onChange={(e) => setUserGuess(e.target.value)}
               placeholder="Enter your answer"
-              className="flex-1 px-4 py-2 rounded-lg bg-background border animate-input focus-ring"
+              className="flex-1 px-4 py-3 sm:py-2 rounded-lg bg-background border animate-input focus-ring text-base sm:text-sm touch-manipulation"
               disabled={hasSubmitted}
             />
-            <span className="flex items-center text-muted-foreground">
+            <span className="flex items-center justify-center sm:justify-start text-muted-foreground text-sm sm:text-base">
               {currentChallenge.toUnit}
             </span>
           </div>
@@ -251,7 +251,7 @@ const DailyChallenge: React.FC = () => {
               type="submit"
               disabled={!userGuess}
               className={cn(
-                "w-full py-2 rounded-lg font-medium animate-button",
+                "w-full py-3 sm:py-2 rounded-lg font-medium animate-button text-base sm:text-sm touch-manipulation",
                 userGuess
                   ? "bg-sky-500 text-white hover:bg-sky-600"
                   : "bg-muted text-muted-foreground cursor-not-allowed"
@@ -263,7 +263,7 @@ const DailyChallenge: React.FC = () => {
             <button
               type="button"
               onClick={handleNewChallenge}
-              className="w-full py-2 rounded-lg font-medium animate-button bg-green-500 text-white hover:bg-green-600"
+              className="w-full py-3 sm:py-2 rounded-lg font-medium animate-button bg-green-500 text-white hover:bg-green-600 text-base sm:text-sm touch-manipulation"
             >
               Try A New Challenge
             </button>
@@ -271,7 +271,7 @@ const DailyChallenge: React.FC = () => {
         </form>
         
         {hasSubmitted && (
-          <div className="mt-4 text-center text-sm text-muted-foreground">
+          <div className="mt-4 text-center text-xs sm:text-sm text-muted-foreground">
             The correct answer was: {currentChallenge.answer.toFixed(2)} {currentChallenge.toUnit}
           </div>
         )}
@@ -281,8 +281,8 @@ const DailyChallenge: React.FC = () => {
             <div className="flex justify-center mb-2">
               {currentReward.icon}
             </div>
-            <h4 className="font-medium text-lg mb-1">Congratulations!</h4>
-            <p>You earned: {currentReward.label}</p>
+            <h4 className="font-medium text-base sm:text-lg mb-1">Congratulations!</h4>
+            <p className="text-sm sm:text-base">You earned: {currentReward.label}</p>
             <p className="text-xs text-muted-foreground mt-2">
               Keep your streak going for even better rewards!
             </p>

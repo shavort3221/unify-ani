@@ -294,45 +294,45 @@ const UnitConverter: React.FC = () => {
   const searchResults = getAllConverters();
   
   return (
-    <section id="converter" className="py-8 px-6 md:px-12 scroll-mt-24 animate-fade-in">
+    <section id="converter" className="py-6 sm:py-8 px-4 sm:px-6 md:px-12 scroll-mt-20 animate-fade-in">
 
 
     
       <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-12 space-y-2">
-          <span className="inline-block py-1 px-3 rounded-full bg-primary/10 text-primary text-sm font-medium">
+        <div className="text-center mb-8 sm:mb-12 space-y-2">
+          <span className="inline-block py-1 px-3 rounded-full bg-primary/10 text-primary text-xs sm:text-sm font-medium">
             Powerful & Simple
           </span>
-          <h2 className="text-3xl md:text-4xl font-sans font-bold">Advanced Unit Converter</h2>
-          <p className="text-muted-foreground max-w-xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-sans font-bold px-4 sm:px-0">Advanced Unit Converter</h2>
+          <p className="text-sm sm:text-base text-muted-foreground max-w-xl mx-auto px-4 sm:px-0">
             Convert between hundreds of different units with precision and ease. Select a category to get started.
           </p>
           
           {/* Enhanced search bar */}
-          <div className="max-w-md mx-auto mt-4 relative">
+          <div className="max-w-sm sm:max-w-md mx-auto mt-4 relative px-4 sm:px-0">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" size={18} />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" size={16} />
               <input 
                 type="text" 
                 placeholder="Search for a converter..." 
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 rounded-full border border-input bg-background focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all"
+                className="w-full pl-9 pr-10 py-2.5 sm:py-2 rounded-full border border-input bg-background focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all text-sm sm:text-base touch-manipulation"
               />
               {searchTerm && (
                 <button 
                   onClick={() => setSearchTerm('')}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground touch-manipulation p-1"
                 >
-                  <X size={16} />
+                  <X size={14} />
                 </button>
               )}
             </div>
             
             {/* Enhanced search results */}
             {searchTerm && searchResults.length > 0 && (
-              <div className="absolute top-full mt-2 left-0 right-0 bg-background border border-input rounded-lg shadow-lg p-2 z-10">
-                <div className="max-h-60 overflow-y-auto">
+              <div className="absolute top-full mt-2 left-4 right-4 sm:left-0 sm:right-0 bg-background border border-input rounded-lg shadow-lg p-2 z-10">
+                <div className="max-h-48 sm:max-h-60 overflow-y-auto">
                   {searchResults.map((item, index) => (
                     <button
                       key={`${item.type}-${index}`}
@@ -341,11 +341,11 @@ const UnitConverter: React.FC = () => {
                         handleTypeChange(item.type as ConversionType);
                         setSearchTerm('');
                       }}
-                      className="w-full text-left px-3 py-2 rounded-md hover:bg-muted flex items-center gap-2"
+                      className="w-full text-left px-3 py-3 sm:py-2 rounded-md hover:bg-muted flex items-center gap-2 touch-manipulation text-sm sm:text-base"
                     >
-                      {conversionIcons[item.type] || <Calculator size={18} />}
+                      {conversionIcons[item.type] || <Calculator size={16} />}
                       <span>{item.label}</span>
-                      <span className="ml-auto text-xs opacity-60 capitalize">
+                      <span className="ml-auto text-xs opacity-60 capitalize hidden sm:inline">
                         {item.category}
                       </span>
                     </button>
@@ -356,16 +356,16 @@ const UnitConverter: React.FC = () => {
           </div>
         </div>
         
-        <div className="mb-8">
+        <div className="mb-6 sm:mb-8">
           <LayoutGroup>
             <Tabs defaultValue="common" value={selectedTab} onValueChange={setSelectedTab} className="w-full">
-            <div className="relative overflow-hidden mb-2">
-              <TabsList className="w-full justify-start overflow-x-auto pb-2 flex gap-2 bg-transparent h-auto relative">
+            <div className="relative overflow-hidden mb-4">
+              <TabsList className="w-full justify-start overflow-x-auto pb-2 flex gap-1 sm:gap-2 bg-transparent h-auto relative px-4 sm:px-0">
                 {['common', 'engineering', 'digital', 'lifestyle'].map((tab) => (
                   <TabsTrigger 
                     key={tab}
                     value={tab}
-                    className="px-4 py-2 relative z-10 transition-colors duration-200 data-[state=active]:text-primary-foreground data-[state=inactive]:text-foreground/70 data-[state=inactive]:hover:text-foreground"
+                    className="px-3 sm:px-4 py-2 relative z-10 transition-colors duration-200 data-[state=active]:text-primary-foreground data-[state=inactive]:text-foreground/70 data-[state=inactive]:hover:text-foreground text-sm sm:text-base whitespace-nowrap touch-manipulation"
                   >
                     {selectedTab === tab && (
                       <motion.div
@@ -383,10 +383,10 @@ const UnitConverter: React.FC = () => {
                   </TabsTrigger>
                 ))}
               </TabsList>
-              <div className="absolute top-0 right-0 h-full w-16 bg-gradient-to-l from-background to-transparent pointer-events-none"></div>
+              <div className="absolute top-0 right-0 h-full w-8 sm:w-16 bg-gradient-to-l from-background to-transparent pointer-events-none sm:hidden"></div>
             </div>
             <AnimatePresence mode="wait" initial={false}>
-              <TabsContent key={selectedTab} value={selectedTab} className="mt-4" forceMount>
+              <TabsContent key={selectedTab} value={selectedTab} className="mt-4 px-4 sm:px-0" forceMount>
                 <motion.div 
                   key={selectedTab}
                   initial={{ opacity: 0, y: 10 }}
@@ -399,20 +399,21 @@ const UnitConverter: React.FC = () => {
                   className="relative w-full"
                 >
                   {selectedTab === 'common' && !searchTerm && (
-                    <div className="flex flex-wrap gap-2 items-center overflow-hidden">
+                    <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 items-center overflow-hidden">
                       {conversionCategories.common.slice(0, TOP_COMMON_COUNT).map((item) => (
                         <button
                           key={item.type}
                           onClick={() => handleTypeChange(item.type as ConversionType)}
                           className={cn(
-                            "flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap animate-button animate-verified",
+                            "flex items-center justify-center sm:justify-start gap-1 sm:gap-2 px-2 sm:px-4 py-2 sm:py-2 rounded-lg whitespace-nowrap animate-button animate-verified text-xs sm:text-sm touch-manipulation",
                             selectedType === item.type 
                               ? "bg-primary text-primary-foreground active-tab verified" 
                               : "bg-secondary/50 text-secondary-foreground hover:bg-secondary/70 hover:shadow-md"
                           )}
                         >
-                          {conversionIcons[item.type] || <Calculator size={18} />}
-                          <span>{item.label}</span>
+                          {conversionIcons[item.type] || <Calculator size={14} className="sm:w-[18px] sm:h-[18px]" />}
+                          <span className="hidden sm:inline">{item.label}</span>
+                          <span className="sm:hidden text-center leading-tight">{item.label.split(' ')[0]}</span>
                         </button>
                       ))}
                       <AnimatePresence initial={false}>
@@ -423,21 +424,22 @@ const UnitConverter: React.FC = () => {
                             animate={{ opacity: 1, height: 'auto' }}
                             exit={{ opacity: 0, height: 0 }}
                             transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
-                            className="flex flex-wrap gap-2 items-center overflow-hidden"
+                            className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 items-center overflow-hidden col-span-2"
                           >
                             {conversionCategories.common.slice(TOP_COMMON_COUNT).map((item) => (
                               <button
                                 key={item.type}
                                 onClick={() => handleTypeChange(item.type as ConversionType)}
                                 className={cn(
-                                  "flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap animate-button animate-verified",
+                                  "flex items-center justify-center sm:justify-start gap-1 sm:gap-2 px-2 sm:px-4 py-2 sm:py-2 rounded-lg whitespace-nowrap animate-button animate-verified text-xs sm:text-sm touch-manipulation",
                                   selectedType === item.type 
                                     ? "bg-primary text-primary-foreground active-tab verified" 
                                     : "bg-secondary/50 text-secondary-foreground hover:bg-secondary/70 hover:shadow-md"
                                 )}
                               >
-                                {conversionIcons[item.type] || <Calculator size={18} />}
-                                <span>{item.label}</span>
+                                {conversionIcons[item.type] || <Calculator size={14} className="sm:w-[18px] sm:h-[18px]" />}
+                                <span className="hidden sm:inline">{item.label}</span>
+                                <span className="sm:hidden text-center leading-tight">{item.label.split(' ')[0]}</span>
                               </button>
                             ))}
                           </motion.div>
@@ -446,28 +448,29 @@ const UnitConverter: React.FC = () => {
                     </div>
                   )}
                   {selectedTab !== 'common' && !searchTerm && (
-                    <div className="flex flex-wrap gap-2 items-center overflow-hidden">
+                    <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 items-center overflow-hidden">
                       {conversionCategories[selectedTab]?.map((item) => (
                         <button
                           key={item.type}
                           onClick={() => handleTypeChange(item.type as ConversionType)}
                           className={cn(
-                            "flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap animate-button animate-verified",
+                            "flex items-center justify-center sm:justify-start gap-1 sm:gap-2 px-2 sm:px-4 py-2 sm:py-2 rounded-lg whitespace-nowrap animate-button animate-verified text-xs sm:text-sm touch-manipulation",
                             selectedType === item.type 
                               ? "bg-primary text-primary-foreground active-tab verified" 
                               : "bg-secondary/50 text-secondary-foreground hover:bg-secondary/70 hover:shadow-md"
                           )}
                         >
-                          {conversionIcons[item.type] || <Calculator size={18} />}
-                          <span>{item.label}</span>
+                          {conversionIcons[item.type] || <Calculator size={14} className="sm:w-[18px] sm:h-[18px]" />}
+                          <span className="hidden sm:inline">{item.label}</span>
+                          <span className="sm:hidden text-center leading-tight">{item.label.split(' ')[0]}</span>
                         </button>
                       ))}
                     </div>
                   )}
                   {selectedTab === 'common' && !searchTerm && (
-                    <div className="mt-3">
+                    <div className="mt-3 px-4 sm:px-0">
                       <button
-                        className="px-4 py-1 rounded bg-muted text-muted-foreground hover:bg-secondary/70 transition text-sm"
+                        className="px-4 py-2 rounded bg-muted text-muted-foreground hover:bg-secondary/70 transition text-sm touch-manipulation"
                         onClick={() => setShowAllCommon(v => !v)}
                       >
                         {showAllCommon ? 'Show Less' : 'Show More'}
@@ -481,8 +484,8 @@ const UnitConverter: React.FC = () => {
           </LayoutGroup>
         </div>
         
-        <div className="flex flex-col lg:flex-row gap-8 items-start">
-          <div className={showTips ? "w-full lg:w-9/12 animate-card" : "w-full lg:w-full animate-card"}>
+        <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-start">
+          <div className={showTips ? "w-full lg:w-9/12 animate-card" : "w-full animate-card"}>
             <ConversionCard
               category={selectedType}
               units={getUnitsForType(selectedType)}
@@ -491,10 +494,10 @@ const UnitConverter: React.FC = () => {
             />
           </div>
           {showTips && (
-            <div className="w-full lg:w-3/12 animate-card" style={{ animationDelay: '100ms' }}>
-              <GlassmorphicCard variant="subtle" hover borderGlow className="bg-white/40 dark:bg-white/10 p-4">
+            <div className="w-full lg:w-3/12 animate-card hidden lg:block" style={{ animationDelay: '100ms' }}>
+              <GlassmorphicCard variant="subtle" hover borderGlow className="bg-white/40 dark:bg-white/10 p-4 lg:p-6">
                 <div className="flex justify-between items-center mb-2">
-                  <h3 className="text-lg font-medium">Conversion Tips</h3>
+                  <h3 className="text-base lg:text-lg font-medium">Conversion Tips</h3>
                   <button
                     className="ml-2 p-1 rounded hover:bg-black/10 dark:hover:bg-white/10 transition"
                     onClick={() => {
@@ -503,13 +506,13 @@ const UnitConverter: React.FC = () => {
                     }}
                     title="Hide tips"
                   >
-                    <X size={16} />
+                    <X size={14} />
                   </button>
                 </div>
-                <div className="space-y-3 text-sm">
+                <div className="space-y-3 text-xs lg:text-sm">
                   <div className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
                     <h4 className="font-medium text-blue-800 dark:text-blue-200 mb-1">Quick Tips</h4>
-                    <ul className="text-blue-700 dark:text-blue-300 space-y-1 text-xs">
+                    <ul className="text-blue-700 dark:text-blue-300 space-y-1 text-xs lg:text-xs">
                       <li>• Use keyboard shortcuts for faster conversion</li>
                       <li>• Adjust decimal places in settings</li>
                       <li>• Copy results with one click</li>
@@ -519,14 +522,14 @@ const UnitConverter: React.FC = () => {
                   
                   <div className="p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
                     <h4 className="font-medium text-green-800 dark:text-green-200 mb-1">Did You Know?</h4>
-                    <p className="text-green-700 dark:text-green-300 text-xs">
+                    <p className="text-green-700 dark:text-green-300 text-xs lg:text-xs">
                       Hover over unit names to see helpful descriptions and learn more about each measurement.
                     </p>
                   </div>
                   
                   <div className="p-3 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
                     <h4 className="font-medium text-purple-800 dark:text-purple-200 mb-1">New Features</h4>
-                    <ul className="text-purple-700 dark:text-purple-300 space-y-1 text-xs">
+                    <ul className="text-purple-700 dark:text-purple-300 space-y-1 text-xs lg:text-xs">
                       <li>• BMI Calculator</li>
                       <li>• Roman Numeral Converter</li>
                       <li>• Clothing & Shoe Sizes</li>
@@ -537,10 +540,10 @@ const UnitConverter: React.FC = () => {
               </GlassmorphicCard>
             </div>
           )}
-          {!showTips && (
-            <div className="w-full lg:hidden flex justify-center mt-4">
+          <div className="w-full flex justify-center mt-4 lg:hidden">
+            {!showTips ? (
               <button
-                className="px-4 py-2 rounded bg-white/30 dark:bg-white/10 text-sm text-primary hover:bg-white/50 dark:hover:bg-white/20 transition"
+                className="px-4 py-2 rounded bg-white/30 dark:bg-white/10 text-sm text-primary hover:bg-white/50 dark:hover:bg-white/20 transition touch-manipulation"
                 onClick={() => {
                   setShowTips(true);
                   localStorage.setItem('showTips', 'true');
@@ -548,55 +551,65 @@ const UnitConverter: React.FC = () => {
               >
                 Show Tips
               </button>
-            </div>
-          )}
+            ) : (
+              <button
+                className="px-4 py-2 rounded bg-white/30 dark:bg-white/10 text-sm text-primary hover:bg-white/50 dark:hover:bg-white/20 transition touch-manipulation"
+                onClick={() => {
+                  setShowTips(false);
+                  localStorage.setItem('showTips', 'false');
+                }}
+              >
+                Hide Tips
+              </button>
+            )}
+          </div>
         </div>
         
-        <div className="mt-20 glass rounded-xl p-8 animate-fade-in" style={{ animationDelay: '200ms' }}>
+        <div className="mt-12 sm:mt-16 lg:mt-20 glass rounded-xl p-6 sm:p-8 animate-fade-in mx-4 sm:mx-0" style={{ animationDelay: '200ms' }}>
           <div className="text-center mb-6">
-            <h3 className="text-2xl font-display font-medium mb-2">Enhanced Features</h3>
-            <p className="text-muted-foreground">
+            <h3 className="text-xl sm:text-2xl font-display font-medium mb-2">Enhanced Features</h3>
+            <p className="text-sm sm:text-base text-muted-foreground px-4 sm:px-0">
               Discover all the powerful features that make conversion effortless
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div className="text-center p-4 animate-card hover:bg-white/50 dark:hover:bg-gray-800/50 rounded-lg">
-              <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Settings className="text-primary" size={24} />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            <div className="text-center p-4 sm:p-4 animate-card hover:bg-white/50 dark:hover:bg-gray-800/50 rounded-lg">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                <Settings className="text-primary" size={20} />
               </div>
-              <h4 className="text-lg font-medium mb-2">Customizable</h4>
-              <p className="text-muted-foreground text-sm">
+              <h4 className="text-base sm:text-lg font-medium mb-2">Customizable</h4>
+              <p className="text-muted-foreground text-xs sm:text-sm">
                 Adjust decimal places, save preferences, and personalize your experience
               </p>
             </div>
             
-            <div className="text-center p-4 animate-card hover:bg-white/50 dark:hover:bg-gray-800/50 rounded-lg">
-              <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Clock className="text-primary" size={24} />
+            <div className="text-center p-4 sm:p-4 animate-card hover:bg-white/50 dark:hover:bg-gray-800/50 rounded-lg">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                <Clock className="text-primary" size={20} />
               </div>
-              <h4 className="text-lg font-medium mb-2">History Tracking</h4>
-              <p className="text-muted-foreground text-sm">
+              <h4 className="text-base sm:text-lg font-medium mb-2">History Tracking</h4>
+              <p className="text-muted-foreground text-xs sm:text-sm">
                 Keep track of your recent conversions with timestamps and easy copying
               </p>
             </div>
             
-            <div className="text-center p-4 animate-card hover:bg-white/50 dark:hover:bg-gray-800/50 rounded-lg">
-              <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Zap className="text-primary" size={24} />
+            <div className="text-center p-4 sm:p-4 animate-card hover:bg-white/50 dark:hover:bg-gray-800/50 rounded-lg">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                <Zap className="text-primary" size={20} />
               </div>
-              <h4 className="text-lg font-medium mb-2">Quick Shortcuts</h4>
-              <p className="text-muted-foreground text-sm">
+              <h4 className="text-base sm:text-lg font-medium mb-2">Quick Shortcuts</h4>
+              <p className="text-muted-foreground text-xs sm:text-sm">
                 Access common conversions instantly with keyboard shortcuts
               </p>
             </div>
             
-            <div className="text-center p-4 animate-card hover:bg-white/50 dark:hover:bg-gray-800/50 rounded-lg">
-              <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Info className="text-primary" size={24} />
+            <div className="text-center p-4 sm:p-4 animate-card hover:bg-white/50 dark:hover:bg-gray-800/50 rounded-lg">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                <Info className="text-primary" size={20} />
               </div>
-              <h4 className="text-lg font-medium mb-2">Educational</h4>
-              <p className="text-muted-foreground text-sm">
+              <h4 className="text-base sm:text-lg font-medium mb-2">Educational</h4>
+              <p className="text-muted-foreground text-xs sm:text-sm">
                 Learn about units with helpful tooltips and descriptions
               </p>
             </div>

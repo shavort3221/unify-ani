@@ -138,43 +138,43 @@ const Hero: React.FC = () => {
   }, []);
   
   return (
-    <section id="home" ref={heroRef} className="min-h-[70vh] flex flex-col justify-center relative pt-16 pb-16 px-6 md:px-12 overflow-hidden">
+    <section id="home" ref={heroRef} className="min-h-[60vh] sm:min-h-[70vh] flex flex-col justify-center relative pt-20 sm:pt-16 pb-12 sm:pb-16 px-4 sm:px-6 md:px-12 overflow-hidden">
       <AnimatedBackground />
       <AIGridBackground />
       
       <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="absolute left-0 right-0 bottom-0 h-[40%] bg-gradient-to-t from-sky-500/5 to-transparent dark:from-sky-900/10"></div>
+        <div className="absolute left-0 right-0 bottom-0 h-[30%] sm:h-[40%] bg-gradient-to-t from-sky-500/5 to-transparent dark:from-sky-900/10"></div>
       </div>
       
-      <div className="relative z-10 max-w-4xl mx-auto text-center space-y-8">
+      <div className="relative z-10 max-w-4xl mx-auto text-center space-y-6 sm:space-y-8">
         <div className="animate-on-scroll opacity-0" style={{ transitionDelay: '100ms' }}>
-          <span className="inline-flex items-center gap-2 py-2 px-4 rounded-full bg-sky-500/10 text-sky-600 dark:bg-sky-400/10 dark:text-sky-400 font-medium mb-4 hover-lift">
-            <Sparkles size={16} className="animate-pulse" />
+          <span className="inline-flex items-center gap-2 py-2 px-3 sm:px-4 rounded-full bg-sky-500/10 text-sky-600 dark:bg-sky-400/10 dark:text-sky-400 font-medium mb-4 hover-lift text-sm sm:text-base">
+            <Sparkles size={14} className="animate-pulse sm:w-4 sm:h-4" />
             Simple • Precise • Elegant
           </span>
         </div>
         
-        <h1 className="animate-on-scroll opacity-0 text-4xl md:text-5xl lg:text-6xl font-sans font-bold tracking-tight text-balance" style={{ transitionDelay: '200ms' }}>
+        <h1 className="animate-on-scroll opacity-0 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-sans font-bold tracking-tight text-balance leading-tight" style={{ transitionDelay: '200ms' }}>
           <span className="animated-gradient-text">
             Convert Units with
           </span> 
           <br />
           <span className="relative animated-gradient-text">
             Precision & Elegance
-            <svg className="absolute -bottom-2 left-0 w-full h-2 text-sky-500/50 dark:text-sky-400/50" viewBox="0 0 300 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg className="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-1 sm:h-2 text-sky-500/50 dark:text-sky-400/50" viewBox="0 0 300 12" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M2 10C47.5 4 93 1.5 138.5 2C184 2.5 229.5 4 275 10" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
             </svg>
           </span>
         </h1>
         
-        <p className="animate-on-scroll opacity-0 text-base md:text-lg text-muted-foreground max-w-2xl mx-auto" style={{ transitionDelay: '300ms' }}>
+        <p className="animate-on-scroll opacity-0 text-sm sm:text-base md:text-lg text-muted-foreground max-w-2xl mx-auto px-4 sm:px-0" style={{ transitionDelay: '300ms' }}>
           A beautifully designed unit converter that transforms complex calculations into a seamless experience. Fast, accurate, and intuitive.
         </p>
         
-        <div className="animate-fade-in flex flex-col sm:flex-row items-center justify-center gap-4 pt-6 mb-8" style={{ transitionDelay: '400ms' }}>
+        <div className="animate-fade-in flex flex-col items-center justify-center gap-4 pt-4 sm:pt-6 mb-6 sm:mb-8" style={{ transitionDelay: '400ms' }}>
           <a 
             href="#converter" 
-            className="px-6 py-3 rounded-lg btn-gradient text-white font-medium animate-button hover:shadow-lg hover:shadow-sky-500/20 smooth-scroll-link"
+            className="w-full sm:w-auto px-8 py-3 sm:px-6 sm:py-3 rounded-lg btn-gradient text-white font-medium animate-button hover:shadow-lg hover:shadow-sky-500/20 smooth-scroll-link text-center touch-manipulation"
             onClick={(e) => {
               e.preventDefault();
               document.getElementById('converter')?.scrollIntoView({ behavior: 'smooth' });

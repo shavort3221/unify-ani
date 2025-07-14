@@ -291,14 +291,14 @@ const ConversionCard = ({ category, units, activePanel, setActivePanel }: Conver
   const renderConvertPanel = () => (
     <CardContent className="pt-6">
       {/* Settings Row */}
-      <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg animate-card">
+      <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg animate-card mb-4">
         <div className="flex items-center gap-2">
-          <Settings className="h-4 w-4 text-muted-foreground" />
-          <span className="text-sm font-medium">Decimal Places:</span>
+          <Settings className="h-4 w-4 text-muted-foreground hidden sm:block" />
+          <span className="text-xs sm:text-sm font-medium">Decimal Places:</span>
           <select 
             value={decimalPlaces} 
             onChange={(e) => setDecimalPlaces(Number(e.target.value))}
-            className="px-2 py-1 rounded border bg-background text-sm animate-input focus-ring"
+            className="px-2 py-1 rounded border bg-background text-xs sm:text-sm animate-input focus-ring touch-manipulation"
           >
             {[2, 3, 4, 5, 6].map(n => (
               <option key={n} value={n}>{n}</option>
@@ -307,26 +307,27 @@ const ConversionCard = ({ category, units, activePanel, setActivePanel }: Conver
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-[1fr,auto,1fr] gap-3 items-center">
+      <div className="grid grid-cols-1 gap-4 sm:gap-3">
+        {/* From Unit */}
         <div className="space-y-2">
-          <label className="text-sm font-medium flex items-center gap-1">
+          <label className="text-xs sm:text-sm font-medium flex items-center gap-1">
             From
             {getUnitDetails(fromUnit)?.label && (
-              <div className="group relative">
+              <div className="group relative hidden sm:block">
                 <Info className="h-3 w-3 text-muted-foreground cursor-help" />
-                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 animate-smooth whitespace-nowrap z-10">
+                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 animate-smooth whitespace-nowrap z-10 pointer-events-none">
                   {getUnitDetails(fromUnit)?.label}
                 </div>
               </div>
             )}
           </label>
           <Select value={fromUnit} onValueChange={setFromUnit}>
-            <SelectTrigger className="w-full">
+            <SelectTrigger className="w-full h-12 sm:h-10 text-sm sm:text-base touch-manipulation">
               <SelectValue placeholder="Select unit" />
             </SelectTrigger>
             <SelectContent>
               {units.map((unit) => (
-                <SelectItem key={unit.value} value={unit.value}>
+                <SelectItem key={unit.value} value={unit.value} className="text-sm sm:text-base py-3 sm:py-2 touch-manipulation">
                   {unit.label}
                 </SelectItem>
               ))}
@@ -337,7 +338,7 @@ const ConversionCard = ({ category, units, activePanel, setActivePanel }: Conver
               type="number"
               value={value.toString()}
               onChange={handleInputChange}
-              className={cn("mt-2", inputError && "border-red-500")}
+              className={cn("mt-2 h-12 sm:h-10 text-base sm:text-sm touch-manipulation", inputError && "border-red-500")}
               placeholder="Enter value"
             />
             {inputError && (
@@ -346,130 +347,135 @@ const ConversionCard = ({ category, units, activePanel, setActivePanel }: Conver
           </div>
         </div>
         
-        <div className="flex justify-center my-2">
+        {/* Swap Button */}
+        <div className="flex justify-center my-2 sm:my-0 order-2 sm:order-none">
           <Button 
             variant="outline" 
             size="icon" 
             onClick={switchUnits} 
-            className="rounded-full h-10 w-10 animate-button hover:rotate-180"
+            className="rounded-full h-12 w-12 sm:h-10 sm:w-10 animate-button hover:rotate-180 touch-manipulation"
             title="Swap units (or press Tab)"
           >
-            <ArrowRightLeft className="h-4 w-4" />
+            <ArrowRightLeft className="h-5 w-5 sm:h-4 sm:w-4" />
           </Button>
         </div>
         
+        {/* To Unit */}
         <div className="space-y-2">
-          <label className="text-sm font-medium flex items-center gap-1">
+          <label className="text-xs sm:text-sm font-medium flex items-center gap-1">
             To
             {getUnitDetails(toUnit)?.label && (
-              <div className="group relative">
+              <div className="group relative hidden sm:block">
                 <Info className="h-3 w-3 text-muted-foreground cursor-help" />
-                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 animate-smooth whitespace-nowrap z-10">
+                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 animate-smooth whitespace-nowrap z-10 pointer-events-none">
                   {getUnitDetails(toUnit)?.label}
                 </div>
               </div>
             )}
           </label>
           <Select value={toUnit} onValueChange={setToUnit}>
-            <SelectTrigger className="w-full">
+            <SelectTrigger className="w-full h-12 sm:h-10 text-sm sm:text-base touch-manipulation">
               <SelectValue placeholder="Select unit" />
             </SelectTrigger>
             <SelectContent>
               {units.map((unit) => (
-                <SelectItem key={unit.value} value={unit.value}>
+                <SelectItem key={unit.value} value={unit.value} className="text-sm sm:text-base py-3 sm:py-2 touch-manipulation">
                   {unit.label}
                 </SelectItem>
               ))}
             </SelectContent>
           </Select>
-          <div className="mt-2 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-md border border-gray-100 dark:border-gray-800 flex items-center justify-between animate-card">
+          <div className="mt-2 p-4 sm:p-3 bg-gray-50 dark:bg-gray-800/50 rounded-md border border-gray-100 dark:border-gray-800 flex items-center justify-between animate-card min-h-[48px] sm:min-h-[40px]">
             <AnimatedNumber 
               value={result} 
-              className="text-lg font-medium" 
+              className="text-base sm:text-lg font-medium" 
               decimals={decimalPlaces}
             />
             <Button
               variant="ghost"
               size="sm"
               onClick={() => copyResult(formatResult(result))}
-              className="ml-2 h-6 w-6 p-0 animate-button"
+              className="ml-2 h-8 w-8 sm:h-6 sm:w-6 p-0 animate-button touch-manipulation"
               title="Copy result"
             >
-              <Copy className="h-3 w-3" />
+              <Copy className="h-4 w-4 sm:h-3 sm:w-3" />
             </Button>
           </div>
         </div>
       </div>
 
-      <div className="pt-2">
-        <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3 animate-card">
-          <p className="text-sm text-center text-blue-700 dark:text-blue-300">
+      <div className="pt-4">
+        <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3 sm:p-3 animate-card">
+          <p className="text-xs sm:text-sm text-center text-blue-700 dark:text-blue-300">
             {value} {fromUnit} = {formatResult(result)} {toUnit}
           </p>
         </div>
       </div>
-      <Button
-        variant="default"
-        onClick={handleConvert}
-        className="mt-2 animate-button"
-      >
-        Convert
-      </Button>
-      <Button
-        variant="outline"
-        onClick={resetValues}
-        className="mt-2 ml-5 animate-button"
-      >
-        Reset
-      </Button>
+      
+      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-4">
+        <Button
+          variant="default"
+          onClick={handleConvert}
+          className="flex-1 sm:flex-none animate-button h-12 sm:h-10 text-base sm:text-sm touch-manipulation"
+        >
+          Convert
+        </Button>
+        <Button
+          variant="outline"
+          onClick={resetValues}
+          className="flex-1 sm:flex-none animate-button h-12 sm:h-10 text-base sm:text-sm touch-manipulation"
+        >
+          Reset
+        </Button>
+      </div>
     </CardContent>
   );
 
   const renderHistoryPanel = () => (
-    <CardContent className="pt-6">
-      <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg animate-card">
-        <h3 className="text-lg font-medium">Recent Conversions</h3>
+    <CardContent className="pt-4 sm:pt-6 px-4 sm:px-6">
+      <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg animate-card mb-4">
+        <h3 className="text-base sm:text-lg font-medium">Recent Conversions</h3>
         {history.length > 0 && (
-          <Button variant="ghost" size="sm" onClick={clearHistoryAnimated} className="animate-button">
+          <Button variant="ghost" size="sm" onClick={clearHistoryAnimated} className="animate-button text-xs sm:text-sm touch-manipulation">
             Clear All
           </Button>
         )}
       </div>
       {history.length === 0 ? (
-        <div className="text-center py-8 text-muted-foreground">
-          <p>No conversion history yet</p>
-          <p className="text-sm mt-1">Your recent conversions will appear here</p>
+        <div className="text-center py-12 sm:py-8 text-muted-foreground">
+          <p className="text-sm sm:text-base">No conversion history yet</p>
+          <p className="text-xs sm:text-sm mt-1">Your recent conversions will appear here</p>
         </div>
       ) : (
-        <div className="space-y-2 max-h-[400px] overflow-y-auto mt-4">
+        <div className="space-y-3 sm:space-y-2 max-h-[300px] sm:max-h-[400px] overflow-y-auto">
           {history.map((item) => (
-            <div key={item.id} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg animate-card">
+            <div key={item.id} className="flex items-start sm:items-center justify-between p-4 sm:p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg animate-card">
               <div className="flex-1">
-                <div className="text-sm font-medium">
+                <div className="text-sm sm:text-sm font-medium break-all">
                   {item.fromValue} {item.fromUnit} → {item.formattedResult} {item.toUnit}
                 </div>
-                <div className="text-xs text-muted-foreground">
+                <div className="text-xs text-muted-foreground mt-1">
                   {new Date(item.timestamp).toLocaleString()}
                 </div>
               </div>
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-2 sm:gap-1 ml-2">
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={() => copyResult(item.formattedResult)}
-                  className="h-6 w-6 p-0 animate-button"
+                  className="h-8 w-8 sm:h-6 sm:w-6 p-0 animate-button touch-manipulation"
                   title="Copy result"
                 >
-                  <Copy className="h-3 w-3" />
+                  <Copy className="h-4 w-4 sm:h-3 sm:w-3" />
                 </Button>
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={() => clearHistoryItem(item.id)}
-                  className="h-6 w-6 p-0 animate-button"
+                  className="h-8 w-8 sm:h-6 sm:w-6 p-0 animate-button touch-manipulation"
                   title="Remove from history"
                 >
-                  <Trash2 className="h-3 w-3" />
+                  <Trash2 className="h-4 w-4 sm:h-3 sm:w-3" />
                 </Button>
               </div>
             </div>
@@ -480,9 +486,9 @@ const ConversionCard = ({ category, units, activePanel, setActivePanel }: Conver
   );
 
   const renderQuickPanel = () => (
-    <CardContent className="pt-6">
-      <h3 className="text-lg font-medium mb-4">Quick Conversions</h3>
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-2 mb-6">
+    <CardContent className="pt-4 sm:pt-6 px-4 sm:px-6">
+      <h3 className="text-base sm:text-lg font-medium mb-4">Quick Conversions</h3>
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-6">
         {quickConversions.map((quick, index) => (
           <Button
             key={index}
@@ -490,27 +496,27 @@ const ConversionCard = ({ category, units, activePanel, setActivePanel }: Conver
             size="sm"
             onClick={() => applyQuickConversion(quick)}
             disabled={quick.category !== category}
-            className="text-xs animate-button"
+            className="text-xs sm:text-xs animate-button h-10 sm:h-8 touch-manipulation"
           >
             {quick.label}
           </Button>
         ))}
       </div>
-      <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg animate-card">
-        <h4 className="font-medium text-blue-800 dark:text-blue-200 mb-2">Keyboard Shortcuts</h4>
-        <div className="text-sm text-blue-700 dark:text-blue-300 space-y-1">
-          <div><kbd className="px-1 py-0.5 bg-blue-100 dark:bg-blue-800 rounded text-xs animate-shimmer">Enter</kbd> Convert (when typing)</div>
-          <div><kbd className="px-1 py-0.5 bg-blue-100 dark:bg-blue-800 rounded text-xs animate-shimmer">Escape</kbd> Reset values</div>
-          <div><kbd className="px-1 py-0.5 bg-blue-100 dark:bg-blue-800 rounded text-xs animate-shimmer">Tab</kbd> Navigate between fields</div>
+      <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg animate-card hidden sm:block">
+        <h4 className="font-medium text-blue-800 dark:text-blue-200 mb-2 text-sm sm:text-base">Keyboard Shortcuts</h4>
+        <div className="text-xs sm:text-sm text-blue-700 dark:text-blue-300 space-y-1">
+          <div><kbd className="px-2 py-1 bg-blue-100 dark:bg-blue-800 rounded text-xs animate-shimmer">Enter</kbd> Convert (when typing)</div>
+          <div><kbd className="px-2 py-1 bg-blue-100 dark:bg-blue-800 rounded text-xs animate-shimmer">Escape</kbd> Reset values</div>
+          <div><kbd className="px-2 py-1 bg-blue-100 dark:bg-blue-800 rounded text-xs animate-shimmer">Tab</kbd> Navigate between fields</div>
         </div>
       </div>
     </CardContent>
   );
 
   return (
-    <Card className="w-full shadow-md border border-gray-100 dark:border-gray-800 animate-fade-in">
-      <div className="pt-6 pb-6">
-        <div className="flex justify-start pl-6">
+    <Card className="w-full shadow-md border border-gray-100 dark:border-gray-800 animate-fade-in mx-4 sm:mx-0">
+      <div className="pt-4 sm:pt-6 pb-4 sm:pb-6">
+        <div className="flex justify-start pl-4 sm:pl-6">
           <LayoutGroup>
             <Tabs
             value={activePanel}
@@ -519,12 +525,12 @@ const ConversionCard = ({ category, units, activePanel, setActivePanel }: Conver
             }}
             className="w-full animate-smooth"
           >
-            <TabsList className="flex gap-8 mb-4 animate-smooth px-0 bg-transparent relative">
+            <TabsList className="flex gap-4 sm:gap-6 lg:gap-8 mb-4 animate-smooth px-0 bg-transparent relative overflow-x-auto">
               {['convert', 'history', 'quick'].map((panel) => (
                 <TabsTrigger 
                   key={panel}
                   value={panel}
-                  className="relative z-10 px-4 py-2 transition-colors duration-200 data-[state=active]:text-primary-foreground data-[state=inactive]:text-foreground/70 data-[state=inactive]:hover:text-foreground bg-transparent"
+                  className="relative z-10 px-3 sm:px-4 py-2 transition-colors duration-200 data-[state=active]:text-primary-foreground data-[state=inactive]:text-foreground/70 data-[state=inactive]:hover:text-foreground bg-transparent text-sm sm:text-base whitespace-nowrap touch-manipulation"
                 >
                   {activePanel === panel && (
                     <motion.div
@@ -549,11 +555,11 @@ const ConversionCard = ({ category, units, activePanel, setActivePanel }: Conver
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={activePanel}
-            initial={{ opacity: 0, x: 20 }}
+            initial={{ opacity: 0, x: 10 }}
             animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
+            exit={{ opacity: 0, x: -10 }}
             transition={{ 
-              duration: 0.25,
+              duration: 0.2,
               ease: [0.4, 0, 0.2, 1]
             }}
           >
@@ -568,3 +574,4 @@ const ConversionCard = ({ category, units, activePanel, setActivePanel }: Conver
 };
 
 export default ConversionCard;
+    <CardContent className="pt-4 sm:pt-6 px-4 sm:px-6">
