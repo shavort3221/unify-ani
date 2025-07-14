@@ -3,4 +3,4 @@ export type ConversionType =
   'length' | 'weight' | 'temperature' | 'area' | 'volume' | 'time' | 'speed' | 
   'data' | 'pressure' | 'angle' | 'currency' | 'energy' | 'power' | 'force' |
   'frequency' | 'fuel' | 'resolution' | 'bmi' | 'clothing' | 'shoe' | 'wind' |
-  'tire' | 'roman'; 
+  'tire' | 'roman' | 'dataTransfer' | 'typography' | 'sound' | 'prefix' | 'worldTime'; 

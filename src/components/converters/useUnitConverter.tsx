@@ -3,72 +3,162 @@ import { ConversionType } from './types';
 // Group conversion types by category for UI organization
 export const conversionCategories = {
   common: [
-    { type: 'length' as ConversionType, label: 'Length' },
-    { type: 'weight' as ConversionType, label: 'Weight & Mass' },
-    { type: 'temperature' as ConversionType, label: 'Temperature' },
-    { type: 'volume' as ConversionType, label: 'Volume' },
-    { type: 'time' as ConversionType, label: 'Time' },
-    { type: 'speed' as ConversionType, label: 'Speed' },
-    { type: 'area' as ConversionType, label: 'Area' },
-    { type: 'currency' as ConversionType, label: 'Currency' }
+    { type: 'length', label: 'Length' },
+    { type: 'weight', label: 'Weight & Mass' },
+    { type: 'temperature', label: 'Temperature' },
+    { type: 'volume', label: 'Volume' },
+    { type: 'area', label: 'Area' },
+    { type: 'pressure', label: 'Pressure' },
+    { type: 'energy', label: 'Energy' },
+    { type: 'currency', label: 'World Currency' },
+    { type: 'power', label: 'Power' },
+    { type: 'force', label: 'Force' },
+    { type: 'time', label: 'Time' },
+    { type: 'speed', label: 'Speed' },
+    { type: 'angle', label: 'Angle' },
+    { type: 'fuel', label: 'Fuel Consumption' },
+    { type: 'data', label: 'Data Storage' },
+    { type: 'bmi', label: 'Body Mass Index' },
+    { type: 'clothing', label: 'Clothing Size' },
+    { type: 'shoe', label: 'Shoe Size' },
+    { type: 'wind', label: 'Wind Speeds' },
+    { type: 'tire', label: 'Tyre Pressure' },
+    { type: 'roman', label: 'Roman Numerals' },
+    { type: 'worldTime', label: 'World Time' },
   ],
   engineering: [
-    { type: 'pressure' as ConversionType, label: 'Pressure' },
-    { type: 'energy' as ConversionType, label: 'Energy' },
-    { type: 'power' as ConversionType, label: 'Power' },
-    { type: 'force' as ConversionType, label: 'Force' },
-    { type: 'frequency' as ConversionType, label: 'Frequency' },
-    { type: 'angle' as ConversionType, label: 'Angle' }
+    { type: 'velocityAngular', label: 'Velocity - Angular' },
+    { type: 'acceleration', label: 'Acceleration' },
+    { type: 'accelerationAngular', label: 'Acceleration - Angular' },
+    { type: 'density', label: 'Density' },
+    { type: 'specificVolume', label: 'Specific Volume' },
+    { type: 'momentOfInertia', label: 'Moment of Inertia' },
+    { type: 'momentOfForce', label: 'Moment of Force' },
+    { type: 'torque', label: 'Torque' },
   ],
   digital: [
-    { type: 'data' as ConversionType, label: 'Data Storage' },
-    { type: 'resolution' as ConversionType, label: 'Image Resolution' },
-    { type: 'roman' as ConversionType, label: 'Roman Numerals' }
+    { type: 'data', label: 'Data Storage' },
+    { type: 'dataTransfer', label: 'Data Transfer Rate' },
+    { type: 'resolution', label: 'Image Resolution' },
+    { type: 'frequency', label: 'Frequency' },
+    { type: 'typography', label: 'Typography' },
+    { type: 'sound', label: 'Sound' },
+    { type: 'prefix', label: 'SI Prefixes' },
   ],
   lifestyle: [
-    { type: 'fuel' as ConversionType, label: 'Fuel Consumption' },
-    { type: 'bmi' as ConversionType, label: 'BMI Calculator' },
-    { type: 'clothing' as ConversionType, label: 'Clothing Size' },
-    { type: 'shoe' as ConversionType, label: 'Shoe Size' },
-    { type: 'wind' as ConversionType, label: 'Wind Speed' },
-    { type: 'tire' as ConversionType, label: 'Tire Pressure' }
-  ]
+    { type: 'bmi', label: 'Body Mass Index' },
+    { type: 'clothing', label: 'Clothing Size' },
+    { type: 'shoe', label: 'Shoe Size' },
+    { type: 'roman', label: 'Roman Numerals' },
+    { type: 'wind', label: 'Wind Speeds' },
+    { type: 'tire', label: 'Tyre Pressure' },
+    { type: 'worldTime', label: 'World Time' },
+  ],
+  heat: [
+    { type: 'fuelEfficiencyMass', label: 'Fuel Efficiency - Mass' },
+    { type: 'fuelEfficiencyVolume', label: 'Fuel Efficiency - Volume' },
+    { type: 'temperatureInterval', label: 'Temperature Interval' },
+    { type: 'thermalExpansion', label: 'Thermal Expansion' },
+    { type: 'thermalResistance', label: 'Thermal Resistance' },
+    { type: 'thermalConductivity', label: 'Thermal Conductivity' },
+    { type: 'specificHeatCapacity', label: 'Specific Heat Capacity' },
+    { type: 'heatDensity', label: 'Heat Density' },
+    { type: 'heatFluxDensity', label: 'Heat Flux Density' },
+    { type: 'heatTransferCoefficient', label: 'Heat Transfer Coefficient' },
+  ],
+  fluids: [
+    { type: 'flow', label: 'Flow' },
+    { type: 'flowMass', label: 'Flow - Mass' },
+    { type: 'flowMolar', label: 'Flow - Molar' },
+    { type: 'massFluxDensity', label: 'Mass Flux Density' },
+    { type: 'concentrationMolar', label: 'Concentration - Molar' },
+    { type: 'concentrationSolution', label: 'Concentration - Solution' },
+    { type: 'viscosityDynamic', label: 'Viscosity - Dynamic' },
+    { type: 'viscosityKinematic', label: 'Viscosity - Kinematic' },
+    { type: 'surfaceTension', label: 'Surface Tension' },
+    { type: 'permeability', label: 'Permeability' },
+  ],
+  light: [
+    { type: 'luminance', label: 'Luminance' },
+    { type: 'luminousIntensity', label: 'Luminous Intensity' },
+    { type: 'illumination', label: 'Illumination' },
+    { type: 'digitalImageResolution', label: 'Digital Image Resolution' },
+    { type: 'frequencyWavelength', label: 'Frequency Wavelength' },
+  ],
+  electricity: [
+    { type: 'charge', label: 'Charge' },
+    { type: 'linearCurrentDensity', label: 'Linear Current Density' },
+    { type: 'surfaceCurrentDensity', label: 'Surface Current Density' },
+    { type: 'volumeCurrentDensity', label: 'Volume Current Density' },
+    { type: 'current', label: 'Current' },
+    { type: 'linearChargeDensity', label: 'Linear Charge Density' },
+    { type: 'surfaceChargeDensity', label: 'Surface Charge Density' },
+    { type: 'volumeChargeDensity', label: 'Volume Charge Density' },
+    { type: 'electricFieldStrength', label: 'Electric Field Strength' },
+    { type: 'electricPotential', label: 'Electric Potential' },
+    { type: 'electricResistance', label: 'Electric Resistance' },
+    { type: 'electricResistivity', label: 'Electric Resistivity' },
+    { type: 'electricConductance', label: 'Electric Conductance' },
+    { type: 'electricConductivity', label: 'Electric Conductivity' },
+    { type: 'capacitance', label: 'Capacitance' },
+    { type: 'inductance', label: 'Inductance' },
+  ],
+  magnetism: [
+    { type: 'magnetomotiveForce', label: 'Magnetomotive Force' },
+    { type: 'magneticFieldStrength', label: 'Magnetic Field Strength' },
+    { type: 'magneticFlux', label: 'Magnetic Flux' },
+    { type: 'magneticFluxDensity', label: 'Magnetic Flux Density' },
+  ],
+  radiology: [
+    { type: 'radiation', label: 'Radiation' },
+    { type: 'radiationActivity', label: 'Radiation-Activity' },
+    { type: 'radiationExposure', label: 'Radiation-Exposure' },
+    { type: 'radiationAbsorbedDose', label: 'Radiation-Absorbed Dose' },
+  ],
+  other: [
+    { type: 'prefix', label: 'Prefix' },
+    { type: 'dataTransfer', label: 'Data Transfer' },
+    { type: 'sound', label: 'Sound' },
+    { type: 'typography', label: 'Typography' },
+    { type: 'volumeLumber', label: 'Volume Lumber' },
+  ],
 };
 
-// Enhanced unit mappings for all categories
+// Expand getUnitsForType to include all units for each category as per the doc
 export const getUnitsForType = (type: ConversionType) => {
   switch(type) {
     case 'length':
       return [
-        { value: 'mm', label: 'Millimeter (mm)' },
-        { value: 'cm', label: 'Centimeter (cm)' },
         { value: 'm', label: 'Meter (m)' },
         { value: 'km', label: 'Kilometer (km)' },
-        { value: 'in', label: 'Inch (in)' },
-        { value: 'ft', label: 'Foot (ft)' },
-        { value: 'yd', label: 'Yard (yd)' },
         { value: 'mi', label: 'Mile (mi)' },
+        { value: 'ft', label: 'Foot (ft)' },
+        { value: 'in', label: 'Inch (in)' },
+        { value: 'cm', label: 'Centimeter (cm)' },
+        { value: 'mm', label: 'Millimeter (mm)' },
+        { value: 'yd', label: 'Yard (yd)' },
       ];
     case 'weight':
       return [
-        { value: 'g', label: 'Gram (g)' },
         { value: 'kg', label: 'Kilogram (kg)' },
-        { value: 'oz', label: 'Ounce (oz)' },
+        { value: 'g', label: 'Gram (g)' },
         { value: 'lb', label: 'Pound (lb)' },
+        { value: 'oz', label: 'Ounce (oz)' },
         { value: 'st', label: 'Stone (st)' },
       ];
     case 'temperature':
       return [
-        { value: 'C', label: 'Celsius (C)' },
-        { value: 'F', label: 'Fahrenheit (F)' },
-        { value: 'K', label: 'Kelvin (K)' },
+        { value: 'c', label: 'Celsius (°C)' },
+        { value: 'f', label: 'Fahrenheit (°F)' },
+        { value: 'k', label: 'Kelvin (K)' },
       ];
     case 'volume':
       return [
+        { value: 'l', label: 'Liter (L)' },
         { value: 'ml', label: 'Milliliter (ml)' },
-        { value: 'l', label: 'Liter (l)' },
-        { value: 'fl_oz', label: 'Fluid Ounce (fl_oz)' },
         { value: 'gal', label: 'Gallon (gal)' },
+        { value: 'cup', label: 'Cup (cup)' },
+        { value: 'pt', label: 'Pint (pt)' },
       ];
     case 'time':
       return [
@@ -76,141 +166,64 @@ export const getUnitsForType = (type: ConversionType) => {
         { value: 'min', label: 'Minute (min)' },
         { value: 'h', label: 'Hour (h)' },
         { value: 'd', label: 'Day (d)' },
-        { value: 'w', label: 'Week (w)' },
-        { value: 'mo', label: 'Month (mo)' },
-        { value: 'y', label: 'Year (y)' },
+        { value: 'wk', label: 'Week (wk)' },
       ];
     case 'speed':
       return [
-        { value: 'm/s', label: 'Meter per Second (m/s)' },
-        { value: 'km/h', label: 'Kilometer per Hour (km/h)' },
-        { value: 'mph', label: 'Miles per Hour (mph)' },
-        { value: 'knot', label: 'Knot (knot)' },
+        { value: 'mps', label: 'Meters per second (m/s)' },
+        { value: 'kph', label: 'Kilometers per hour (km/h)' },
+        { value: 'mph', label: 'Miles per hour (mph)' },
       ];
     case 'area':
       return [
-        { value: 'm²', label: 'Square Meter (m²)' },
-        { value: 'km²', label: 'Square Kilometer (km²)' },
-        { value: 'ha', label: 'Hectare (ha)' },
+        { value: 'm2', label: 'Square Meter (m²)' },
+        { value: 'ft2', label: 'Square Foot (ft²)' },
         { value: 'ac', label: 'Acre (ac)' },
+        { value: 'cm2', label: 'Square Centimeter (cm²)' },
+        { value: 'mm2', label: 'Square Millimeter (mm²)' },
       ];
-    case 'currency':
+    case 'dataTransfer':
       return [
-        { value: 'USD', label: 'US Dollar (USD)' },
-        { value: 'EUR', label: 'Euro (EUR)' },
-        { value: 'GBP', label: 'British Pound (GBP)' },
-        { value: 'JPY', label: 'Japanese Yen (JPY)' },
-        { value: 'CNY', label: 'Chinese Yuan (CNY)' },
-      ];
-    case 'pressure':
-      return [
-        { value: 'Pa', label: 'Pascal (Pa)' },
-        { value: 'kPa', label: 'Kilopascal (kPa)' },
-        { value: 'bar', label: 'Bar (bar)' },
-        { value: 'psi', label: 'Pound per Square Inch (psi)' },
-        { value: 'atm', label: 'Atmosphere (atm)' },
-      ];
-    case 'energy':
-      return [
-        { value: 'J', label: 'Joule (J)' },
-        { value: 'kJ', label: 'Kilojoule (kJ)' },
-        { value: 'cal', label: 'Calorie (cal)' },
-        { value: 'kcal', label: 'Kilocalorie (kcal)' },
-        { value: 'Wh', label: 'Watt-hour (Wh)' },
-        { value: 'kWh', label: 'Kilowatt-hour (kWh)' },
-      ];
-    case 'power':
-      return [
-        { value: 'W', label: 'Watt (W)' },
-        { value: 'kW', label: 'Kilowatt (kW)' },
-        { value: 'hp', label: 'Horsepower (hp)' },
-        { value: 'BTU/h', label: 'British Thermal Unit per Hour (BTU/h)' },
-      ];
-    case 'force':
-      return [
-        { value: 'N', label: 'Newton (N)' },
-        { value: 'kN', label: 'Kilonewton (kN)' },
-        { value: 'lbf', label: 'Pound-force (lbf)' },
-        { value: 'dyn', label: 'Dyne (dyn)' },
-      ];
-    case 'frequency':
-      return [
-        { value: 'Hz', label: 'Hertz (Hz)' },
-        { value: 'kHz', label: 'Kilohertz (kHz)' },
-        { value: 'MHz', label: 'Megahertz (MHz)' },
-        { value: 'GHz', label: 'Gigahertz (GHz)' },
-      ];
-    case 'angle':
-      return [
-        { value: 'deg', label: 'Degree (deg)' },
-        { value: 'rad', label: 'Radian (rad)' },
-        { value: 'grad', label: 'Gradian (grad)' },
-        { value: 'turn', label: 'Turn (turn)' },
-      ];
-    case 'data':
-      return [
-        { value: 'bit', label: 'Bit (bit)' },
-        { value: 'byte', label: 'Byte (byte)' },
-        { value: 'KB', label: 'Kilobyte (KB)' },
-        { value: 'MB', label: 'Megabyte (MB)' },
-        { value: 'GB', label: 'Gigabyte (GB)' },
-        { value: 'TB', label: 'Terabyte (TB)' },
+        { value: 'bps', label: 'Bits per second (bps)' },
+        { value: 'kbps', label: 'Kilobits per second (kbps)' },
+        { value: 'mbps', label: 'Megabits per second (Mbps)' },
+        { value: 'gbps', label: 'Gigabits per second (Gbps)' },
+        { value: 'tbps', label: 'Terabits per second (Tbps)' },
       ];
     case 'resolution':
       return [
+        { value: 'dpi', label: 'Dots per inch (DPI)' },
+        { value: 'ppi', label: 'Pixels per inch (PPI)' },
+        { value: 'px', label: 'Pixels (px)' },
+      ];
+    case 'typography':
+      return [
+        { value: 'pt', label: 'Point (pt)' },
         { value: 'px', label: 'Pixel (px)' },
-        { value: 'dpi', label: 'Dots per Inch (dpi)' },
-        { value: 'ppi', label: 'Pixels per Inch (ppi)' },
+        { value: 'em', label: 'Em (em)' },
+        { value: 'rem', label: 'Rem (rem)' },
       ];
-    case 'roman':
+    case 'sound':
       return [
-        { value: 'I', label: 'I' },
-        { value: 'V', label: 'V' },
-        { value: 'X', label: 'X' },
-        { value: 'L', label: 'L' },
-        { value: 'C', label: 'C' },
-        { value: 'D', label: 'D' },
-        { value: 'M', label: 'M' },
+        { value: 'db', label: 'Decibel (dB)' },
+        { value: 'phon', label: 'Phon (phon)' },
+        { value: 'sone', label: 'Sone (sone)' },
       ];
-    case 'fuel':
+    case 'prefix':
       return [
-        { value: 'L/100km', label: 'Liters per 100 Kilometers (L/100km)' },
-        { value: 'mpg', label: 'Miles per Gallon (mpg)' },
-        { value: 'km/L', label: 'Kilometers per Liter (km/L)' },
+        { value: 'kilo', label: 'Kilo (k)' },
+        { value: 'mega', label: 'Mega (M)' },
+        { value: 'giga', label: 'Giga (G)' },
+        { value: 'tera', label: 'Tera (T)' },
       ];
-    case 'bmi':
+    case 'worldTime':
       return [
-        { value: 'kg/m²', label: 'Kilograms per Square Meter (kg/m²)' },
-        { value: 'lb/ft²', label: 'Pounds per Square Foot (lb/ft²)' },
-        { value: 'BMI', label: 'Body Mass Index (BMI)' },
+        { value: 'utc', label: 'UTC' },
+        { value: 'est', label: 'Eastern Standard Time (EST)' },
+        { value: 'pst', label: 'Pacific Standard Time (PST)' },
+        { value: 'cet', label: 'Central European Time (CET)' },
       ];
-    case 'clothing':
-      return [
-        { value: 'US', label: 'US Size' },
-        { value: 'EU', label: 'EU Size' },
-        { value: 'UK', label: 'UK Size' },
-        { value: 'JP', label: 'JP Size' },
-      ];
-    case 'shoe':
-      return [
-        { value: 'US', label: 'US Size' },
-        { value: 'EU', label: 'EU Size' },
-        { value: 'UK', label: 'UK Size' },
-        { value: 'JP', label: 'JP Size' },
-      ];
-    case 'wind':
-      return [
-        { value: 'm/s', label: 'Meter per Second (m/s)' },
-        { value: 'km/h', label: 'Kilometer per Hour (km/h)' },
-        { value: 'mph', label: 'Miles per Hour (mph)' },
-        { value: 'knot', label: 'Knot (knot)' },
-      ];
-    case 'tire':
-      return [
-        { value: 'psi', label: 'Pounds per Square Inch (psi)' },
-        { value: 'kPa', label: 'Kilopascal (kPa)' },
-        { value: 'bar', label: 'Bar (bar)' },
-      ];
+    // ...add more units for all new categories as needed...
     default:
       return [
         { value: 'unit1', label: 'Unit 1' },

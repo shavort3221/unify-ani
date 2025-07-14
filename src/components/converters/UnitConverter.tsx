@@ -29,6 +29,9 @@ const UnitConverter: React.FC = () => {
     return true;
   });
   
+  const TOP_COMMON_COUNT = 8;
+  const [showAllCommon, setShowAllCommon] = useState(false);
+
   useEffect(() => {
     const activeTab = tabsRef.current?.querySelector('.active-tab');
     if (activeTab) {
@@ -253,7 +256,12 @@ const UnitConverter: React.FC = () => {
 
   // Filter converter types based on search term
   const filterConverters = (category: keyof typeof conversionCategories) => {
-    if (!searchTerm) return conversionCategories[category];
+    if (!searchTerm) {
+      if (category === 'common' && !showAllCommon) {
+        return conversionCategories[category].slice(0, TOP_COMMON_COUNT);
+      }
+      return conversionCategories[category];
+    }
     
     return conversionCategories[category].filter(item => 
       item.label.toLowerCase().includes(searchTerm.toLowerCase())
@@ -274,6 +282,7 @@ const UnitConverter: React.FC = () => {
         ...allResults,
         ...filtered.map(item => ({
           ...item,
+          type: item.type as ConversionType,
           category
         }))
       ];
@@ -329,7 +338,7 @@ const UnitConverter: React.FC = () => {
                       key={`${item.type}-${index}`}
                       onClick={() => {
                         setSelectedTab(item.category);
-                        handleTypeChange(item.type);
+                        handleTypeChange(item.type as ConversionType);
                         setSearchTerm('');
                       }}
                       className="w-full text-left px-3 py-2 rounded-md hover:bg-muted flex items-center gap-2"
@@ -380,31 +389,43 @@ const UnitConverter: React.FC = () => {
             </div>
             <AnimatePresence mode="wait" initial={false}>
               <TabsContent key={selectedTab} value={selectedTab} className="mt-4" forceMount asChild>
-                <motion.div
-                  key={selectedTab}
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -16 }}
-                  transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
-                  ref={tabsRef}
-                  className="flex flex-wrap gap-2"
-                >
-                  {filterConverters(selectedTab as keyof typeof conversionCategories).map((item) => (
-                    <button
-                      key={item.type}
-                      onClick={() => handleTypeChange(item.type)}
-                      className={cn(
-                        "flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap animate-button animate-verified",
-                        selectedType === item.type 
-                          ? "bg-primary text-primary-foreground active-tab verified" 
-                          : "bg-secondary/50 text-secondary-foreground hover:bg-secondary/70 hover:shadow-md"
-                      )}
-                    >
-                      {conversionIcons[item.type] || <Calculator size={18} />}
-                      <span>{item.label}</span>
-                    </button>
-                  ))}
-                </motion.div>
+                <>
+                  <motion.div
+                    key={selectedTab}
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -16 }}
+                    transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
+                    ref={tabsRef}
+                    className="flex flex-wrap gap-2 items-center"
+                  >
+                    {filterConverters(selectedTab as keyof typeof conversionCategories).map((item) => (
+                      <button
+                        key={item.type}
+                        onClick={() => handleTypeChange(item.type as ConversionType)}
+                        className={cn(
+                          "flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap animate-button animate-verified",
+                          selectedType === item.type 
+                            ? "bg-primary text-primary-foreground active-tab verified" 
+                            : "bg-secondary/50 text-secondary-foreground hover:bg-secondary/70 hover:shadow-md"
+                        )}
+                      >
+                        {conversionIcons[item.type] || <Calculator size={18} />}
+                        <span>{item.label}</span>
+                      </button>
+                    ))}
+                  </motion.div>
+                  {selectedTab === 'common' && !searchTerm && (
+                    <div className="mt-3">
+                      <button
+                        className="px-4 py-1 rounded bg-muted text-muted-foreground hover:bg-secondary/70 transition text-sm"
+                        onClick={() => setShowAllCommon(v => !v)}
+                      >
+                        {showAllCommon ? 'Show Less' : 'Show More'}
+                      </button>
+                    </div>
+                  )}
+                </>
               </TabsContent>
             </AnimatePresence>
           </Tabs>
